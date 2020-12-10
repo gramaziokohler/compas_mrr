@@ -127,3 +127,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# VS Code
+.vscode/*
+*.code-workspace
+
+# generated docs
+docs/__build/
+docs/reference/generated/
+
+# Artifact from setuptools_scm for releases
+_version.py
