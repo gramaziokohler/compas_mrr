@@ -21,7 +21,7 @@ def _read(*names, **kwargs):
 long_description = _read("README.md")
 
 requirements = [
-    "compas >=0.15.6, <0.16",
+    "compas >= 0.19.1, <1.0",
 ]
 
 extras_require = {
@@ -41,11 +41,11 @@ extras_require = {
     ]
 }
 
-docs_url = "https://gramaziokohler.github.io/total_station_robot_localization"
-repo_url = "https://github.com/gramaziokohler/total_station_robot_localization"
+docs_url = "https://gramaziokohler.github.io/compas_mobile_robot_reloc"
+repo_url = "https://github.com/gramaziokohler/compas_mobile_robot_reloc"
 
 setuptools.setup(
-    name="total_station_robot_localization",
+    name="compas_mobile_robot_reloc",
     description="Robot localization using external measuring device (total station).",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -76,7 +76,6 @@ setuptools.setup(
         "Documentation": docs_url,
     },
     packages=setuptools.find_packages(where="."),
-    # package_dir={"": "total_station_robot_localization"},
     include_package_data=True,
     zip_safe=False,
     install_requires=requirements,
