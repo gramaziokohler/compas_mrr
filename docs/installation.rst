@@ -14,8 +14,8 @@ Install
 
        conda config --add channels conda-forge
        # use conda to install compas
-       conda create -n total_station_robot_localization python=3.8 compas==0.15.6
-       conda activate total_station_robot_localization
+       conda create -n compas_mobile_robot_reloc python=3.8 compas==0.19.1
+       conda activate compas_mobile_robot_reloc
 
     -  Using `virtualenv <https://github.com/pypa/virtualenv>`__
 
@@ -29,17 +29,17 @@ Install
     .. code:: bash
 
        # or last version
-       pip install total_station_robot_localization
+       pip install compas_mobile_robot_reloc
        # or specific version
-       total_station_robot_localization=={version}
+       compas_mobile_robot_reloc=={version}
        # from latest commit on git
-       pip install git+https://github.com/gramaziokohler/total_station_robot_localization
+       pip install git+https://github.com/gramaziokohler/compas_mobile_robot_reloc
 
 #.  Make package accessible in Rhino and Grasshopper
 
     .. code:: bash
 
-       python -m total_station_robot_localization.rhino_install
+       python -m compas_mobile_robot_reloc.rhino_install
 
 Update
 ======
@@ -48,6 +48,6 @@ To update the repository run:
 
 .. code:: bash
 
-   pip install -U total_station_robot_localization
+   pip install -U compas_mobile_robot_reloc
    # or if you installed directly from github
-   pip install -U git+https://github.com/gramaziokohler/total_station_robot_localization
+   pip install -U git+https://github.com/gramaziokohler/compas_mobile_robot_reloc

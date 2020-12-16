@@ -19,7 +19,7 @@ from __future__ import print_function
 
 import compas.geometry as cg
 
-from total_station_robot_localization.utils import temp_change_compas_precision
+from compas_mobile_robot_reloc.utils import temp_change_compas_precision
 
 
 @temp_change_compas_precision("12f")
@@ -58,3 +58,7 @@ def three_pts_localization(rcs_coords, wcs_coords):
     wcs_robot_base = cg.Frame(wcs_robot_base_origin, wcs_robot_x_dir, wcs_robot_y_dir)
 
     return wcs_robot_base
+
+
+# Make function available using shortened name.
+tpl = three_pts_localization

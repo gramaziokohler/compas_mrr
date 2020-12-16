@@ -3,12 +3,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from compas.geometry import Frame
-from compas.geometry import Transformation
-from compas.geometry import quaternion_from_matrix
-from compas.geometry import translation_from_matrix
+import compas.geometry as cg
 
-from total_station_robot_localization.utils import temp_change_compas_precision
+from compas_mobile_robot_reloc.utils import temp_change_compas_precision
 
 try:
     import typing
@@ -16,12 +13,13 @@ except ImportError:
     pass
 else:
     if typing.TYPE_CHECKING:
-        from typing import List
         from typing import Any
+        from typing import List
 
 
 @temp_change_compas_precision("12f")
-def worldxy_to_robot_base_xform(robot_base_frame):  # type: (Frame) -> Transformation
+def worldxy_to_robot_base_xform(robot_base_frame):
+    # type: (cg.Frame) -> cg.Transformation
     """Calculate the transformation matrix for transformations between WCS to RCS.
 
     Parameters
@@ -34,7 +32,10 @@ def worldxy_to_robot_base_xform(robot_base_frame):  # type: (Frame) -> Transform
     -------
         The transformation matrix.
     """
-    return Transformation.change_basis(Frame.worldXY(), robot_base_frame)
+    frame_from = cg.Frame.worldXY()
+    frame_to = robot_base_frame
+
+    return cg.Transformation.from_change_of_basis(frame_from, frame_to)
 
 
 @temp_change_compas_precision("12f")
@@ -45,8 +46,9 @@ def xform_to_xyz_quaternion(xform):  # type: (Any) -> List[float]
     ----------
     xform
         Transformation to be converted. Can be given as
-        :class:`Rhino.Geometry.Transform`, :class:`compas.geometry.Transformation`
-        or :obj:`list` of :obj:`list` of :obj:`float`.
+        :class:`Rhino.Geometry.Transform`,
+        :class:`compas.geometry.Transformation`,
+        :class:`numpy.ndarray`, or :obj:`list` of :obj:`list` of :obj:`float`.
 
     Returns
     -------
@@ -59,23 +61,26 @@ def xform_to_xyz_quaternion(xform):  # type: (Any) -> List[float]
     >>> xform_to_xyz_quaternion(T)
     [100.0, 100.0, 100.0, 0.5, 0.5, 0.5, 0.5]
     """
-    M = _get_matrix(xform)
-    xyzwxyz = _matrix_to_xyz_quaternion(M)
+    xform = _coerce_cg_xform(xform)
 
-    return xyzwxyz
+    xyz = list(xform.translation_vector)
+
+    wxyz = cg.Quaternion.from_rotation(xform.rotation).wxyz
+
+    return xyz + wxyz  # type: ignore
 
 
-def _get_matrix(xform):  # type: (Any) -> List[List[float]]
-
+def _coerce_cg_xform(xform):  # type: (Any) -> cg.Transformation
     try:
         from Rhino.Geometry import Transform
 
-        from total_station_robot_localization.utils import rgtransform_to_matrix
+        from compas_mobile_robot_reloc.utils import rgtransform_to_matrix
     except ImportError:
         pass
     else:
         if isinstance(xform, Transform):
-            return rgtransform_to_matrix(xform)
+            M = rgtransform_to_matrix(xform)
+            return cg.Transformation.from_matrix(M)
 
     try:
         from numpy import ndarray
@@ -83,16 +88,12 @@ def _get_matrix(xform):  # type: (Any) -> List[List[float]]
         pass
     else:
         if isinstance(xform, ndarray):
-            return xform.tolist()  # type: ignore
+            M = xform.tolist()
+            return cg.Transformation.from_matrix(M)
 
-    if isinstance(xform, Transformation):
-        return xform.matrix  # type: ignore
+    if isinstance(xform, cg.Transformation):
+        return xform
 
-    return xform  # type: ignore
-
-
-def _matrix_to_xyz_quaternion(M):  # type: (List[List[float]]) -> List[float]
-    xyz = translation_from_matrix(M)
-    quaternion = quaternion_from_matrix(M)
-
-    return xyz + quaternion  # type: ignore
+    raise ValueError(
+        "Can't convert {} to compas.geometry.Transformation".format(type(xform))
+    )

@@ -21,11 +21,10 @@ import sys
 import tempfile
 from functools import reduce
 
-import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import minimize
 
-from total_station_robot_localization.utils import temp_change_compas_precision
+from compas_mobile_robot_reloc.utils import temp_change_compas_precision
 
 try:
     from pathlib import Path
@@ -119,6 +118,8 @@ def _nonlinear_jacobian(x):
 
 def _plot(rcs_coords, wcs_coords, results):
     """Create plots to visualize multiple consecutive results from a solver."""
+    import matplotlib.pyplot as plt
+
     rcs_coords = np.array(rcs_coords)
     wcs_coords = np.array(wcs_coords)
 
@@ -159,6 +160,8 @@ def _plot_result(rcs_coords, wcs_coords, result, plot_dir):
     :obj:`str`
         The path at which the plots were stored.
     """
+    import matplotlib.pyplot as plt
+
     origin = result.x[0:3]
     x_vec = result.x[3:6]
     y_vec = result.x[6:9]
@@ -275,7 +278,6 @@ def arbitrary_pts_localization(rcs_coords, wcs_coords, plot_results=False, maxit
         _plot(rcs_coords, wcs_coords, results)
 
     # Pick the result with the lowest objective value
-    print(results)
     result = reduce((lambda x, y: x if x.fun < y.fun else y), results)
 
     origin = result.x[0:3].tolist()
@@ -283,7 +285,3 @@ def arbitrary_pts_localization(rcs_coords, wcs_coords, plot_results=False, maxit
     y_vec = result.x[6:9].tolist()
 
     return [origin, x_vec, y_vec]
-
-
-if __name__ == "__main__":
-    pass
