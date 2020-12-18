@@ -127,11 +127,8 @@ def check(ctx):
         log.write("Pep517 check")
         ctx.run("python -m pep517.check .")
 
-        log.write("Running flake8 python linter...")
-        ctx.run("flake8 --count --statistics src tests")
-
-        log.write("Checking python imports...")
-        ctx.run("isort --check-only --diff --recursive src tests setup.py")
+        log.write("Running all pre-commit hooks on whole repository.")
+        ctx.run("pre-commit run --all-files")
 
 
 @task(

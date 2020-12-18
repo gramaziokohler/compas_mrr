@@ -2,11 +2,6 @@
 ********************************************************************************
 compas_mobile_robot_reloc.utils
 ********************************************************************************
-
-.. currentmodule:: compas_mobile_robot_reloc.utils
-
-.. autosummary::
-    :toctree: generated/
 """
 from __future__ import absolute_import
 from __future__ import division

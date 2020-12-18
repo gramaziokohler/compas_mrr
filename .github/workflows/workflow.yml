@@ -55,7 +55,7 @@ jobs:
         if: matrix.python-version == '3.8' && matrix.os == 'ubuntu-latest'
         with:
           name: docs-dir
-          path: build/docs/
+          path: dist/docs/
           if-no-files-found: error
           retention-days: 1
 

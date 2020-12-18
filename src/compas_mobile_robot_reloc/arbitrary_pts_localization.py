@@ -1,17 +1,7 @@
-"""Arbitrary points method for robot relocalization.
-
-Code adapted from source code by Selen Ercan and Sandro Meier at Gramazio
-Kohler Research, ETH Zürich (2019).
-
-Original code:
-https://github.com/gramaziokohler/IF_jamming/blob/master/if_jamming/localization/arbitrary_point_localization.py
-
-Ercan, Selen, Sandro Meier, Fabio Gramazio, and Matthias Kohler. 2019.
-“Automated Localization of a Mobile Construction Robot with an External
-Measurement Device.” In Proceedings of the 36th International Symposium on
-Automation and Robotics in Construction (ISARC 2019), 929–36. International
-Association on Automation and Robotics in Construction.
-https://doi.org/10.3929/ethz-b-000328442.
+"""
+*******************************************************************************
+Arbitrary points method for robot relocalization.
+*******************************************************************************
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -38,9 +28,6 @@ if TYPE_CHECKING:
     from typing import List
 
     from scipy.optimize import OptimizeResult
-
-
-__all__ = ["arbitrary_pts_localization"]
 
 
 def _objective_function(
