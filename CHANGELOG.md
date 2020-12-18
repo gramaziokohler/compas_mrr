@@ -1,13 +1,9 @@
 # Changelog
 
-## Unreleased
+## 2020-12-18 - 1.0.1
 
 ### Added
-
-### Changed
-
-### Removed
-
+* Moved MeasurementPoint from grasshopper document to `compas_mobile_robot_reloc.utils`.
 
 ## 2020-12-18 - 1.0.0
 
