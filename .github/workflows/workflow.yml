@@ -37,6 +37,7 @@ jobs:
           python -m pip install wheel  # https://stackoverflow.com/questions/34819221
           python -m pip install cython --install-option='--no-cython-compile'
           python -m pip install --no-cache-dir -e .[dev]
+          invoke write_version
           python -c 'from setuptools_scm import get_version;get_version(".", write_to="src/compas_mobile_robot_reloc/_version.py")'
 
       -

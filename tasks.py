@@ -198,6 +198,13 @@ def release(ctx, new_version):
     prepare_changelog(ctx)
 
 
+@task(help="Writes version info to file. Used for builds.")
+def write_version():
+    from setuptools_scm import get_version
+
+    get_version(root=".", write_to="src/compas_mobile_robot_reloc/_version.py")
+
+
 @contextlib.contextmanager
 def chdir(dirname=None):
     current_dir = os.getcwd()
