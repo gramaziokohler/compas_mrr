@@ -1,17 +1,7 @@
-"""Three points method for robot relocalization.
-
-Code adapted from source code by Selen Ercan and Sandro Meier at Gramazio
-Kohler Research, ETH Zurich (2019).
-
-Original code:
-https://github.com/gramaziokohler/IF_jamming/blob/master/if_jamming/localization/transform.py
-
-Ercan, Selen, Sandro Meier, Fabio Gramazio, and Matthias Kohler. 2019.
-"Automated Localization of a Mobile Construction Robot with an External
-Measurement Device." In Proceedings of the 36th International Symposium on
-Automation and Robotics in Construction (ISARC 2019), 929-36. International
-Association on Automation and Robotics in Construction.
-https://doi.org/10.3929/ethz-b-000328442.
+"""
+********************************************************************************
+Three points method for robot relocalization.
+********************************************************************************
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -38,9 +28,6 @@ def _coerce_frame(frame_or_pts):  # type: (Union[List[Point], Frame]) -> Frame
         return frame_or_pts
 
     return _pts_to_frame(frame_or_pts)
-
-
-__all__ = ["three_pts_localization"]
 
 
 def three_pts_localization(

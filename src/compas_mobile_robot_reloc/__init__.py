@@ -2,8 +2,6 @@
 ********************************************************************************
 compas_mobile_robot_reloc
 ********************************************************************************
-
-.. currentmodule:: compas_mobile_robot_reloc
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -37,8 +35,15 @@ def _get_version():  # type: () -> str
         try:
             from importlib.metadata import PackageNotFoundError
             from importlib.metadata import version  # type: ignore [no-redef]
+        except ImportError:
+            # fmt: off
+            from importlib_metadata import (PackageNotFoundError)  # type: ignore [no-redef]  # noqa: E501
+            # fmt: on
+            from importlib_metadata import version  # type: ignore [no-redef]
 
+        try:
             return version("rapid-clay-formations-fab")  # type: ignore [operator]
+
         except PackageNotFoundError:
             # package is not installed
             pass

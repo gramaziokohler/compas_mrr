@@ -42,7 +42,7 @@ def rcs_pts():
 
 def test_proxy(wcs_pts, rcs_pts):
     with Proxy(
-        "compas_mobile_robot_reloc.arbitrary_pts_localization", max_conn_attempts=5
+        "compas_mobile_robot_reloc.arbitrary_pts_localization", python="python"
     ) as proxy:
         result = proxy.arbitrary_pts_localization(rcs_pts, wcs_pts)
         print(type(result))
