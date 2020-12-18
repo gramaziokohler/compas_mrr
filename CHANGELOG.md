@@ -1,11 +1,8 @@
 # Changelog
 
-## Unreleased
+## 2020-12-18 - 1.0.0
 
-### Added
-* Code
-* Tooling
+Package broken out from
+[rapid_clay_formations_fab](https://github.com/gramaziokohler/rapid_clay_formations_fab).
 
-### Changed
-
-### Removed
+Typing and tests added.

@@ -21,7 +21,7 @@ In short, this is how that works.
     conda config --set channel_priority strict
 
     # use conda to install compas if possible
-    conda create -n compas_mobile_robot_reloc-dev python=3.8 compas==0.19.1
+    conda create -n compas_mobile_robot_reloc-dev python=3.8 compas==0.19.3
     conda activate compas_mobile_robot_reloc-dev
     pip install -e .[dev]
     ```

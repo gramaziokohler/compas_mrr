@@ -14,7 +14,7 @@ Install
 
        conda config --add channels conda-forge
        # use conda to install compas
-       conda create -n compas_mobile_robot_reloc python=3.8 compas==0.19.1
+       conda create -n compas_mobile_robot_reloc python=3.8 compas==0.19.3
        conda activate compas_mobile_robot_reloc
 
     -  Using `virtualenv <https://github.com/pypa/virtualenv>`__
