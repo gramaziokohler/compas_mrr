@@ -46,6 +46,7 @@ jobs:
 
       -
         name: Build docs
+        if: matrix.os != 'windows-latest'  # can't deal with the symlinks
         run: |
           invoke docs
 
