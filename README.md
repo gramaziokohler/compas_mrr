@@ -1,2 +1,2 @@
-# total_station_robot_localization
-Robot localization using external measuring device (total station)
+# compas_mobile_robot_reloc
+Robot localization using external measuring device (total station).

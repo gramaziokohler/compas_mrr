@@ -9,7 +9,7 @@ import sphinx_compas_theme
 
 #
 # needs_sphinx = "1.0"
-from total_station_robot_localization import __version__
+from compas_mobile_robot_reloc import __version__
 
 # -- General configuration ------------------------------------------------
 
@@ -96,10 +96,10 @@ html_theme = "compaspkg"
 html_theme_path = sphinx_compas_theme.get_html_theme_path()
 
 html_theme_options = {
-    "package_name": "total_station_robot_localization",
+    "package_name": "compas_mobile_robot_reloc",
     "package_title": project,
     "package_version": release,
-    "package_repo": "https://github.com/gramaziokohler/total_station_robot_localization",  # noqa: E501
+    "package_repo": "https://github.com/gramaziokohler/compas_mobile_robot_reloc",  # noqa: E501
 }
 
 html_context: dict = {}

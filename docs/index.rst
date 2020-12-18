@@ -1,11 +1,11 @@
 ********************************************************************************
-total_station_robot_localization
+compas_mobile_robot_reloc
 ********************************************************************************
 
 COMPAS
 ======
 
-total_station_robot_localization uses `compas_` for geometrical operations.
+compas_mobile_robot_reloc uses ``compas_`` for geometrical operations.
 
 Note on compatibility
 =====================
@@ -27,7 +27,7 @@ Documentation
    installation
    usage
    contributing
-   reference/index
+   reference
    changelog
    license
 

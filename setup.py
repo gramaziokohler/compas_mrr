@@ -18,10 +18,12 @@ def _read(*names, **kwargs):
     ).read()
 
 
+pkg_name = "compas_mobile_robot_reloc"
+
 long_description = _read("README.md")
 
 requirements = [
-    "compas >=0.15.6, <0.16",
+    "compas >= 0.19.3, <1.0",
 ]
 
 extras_require = {
@@ -35,17 +37,18 @@ extras_require = {
         "pydocstyle",
         "pytest >= 3.2",
         "recommonmark >=0.6",
-        "sphinx_compas_theme >= 0.4",
+        "Rhino-Stubs",
         "sphinx >=1.6",
+        "sphinx_compas_theme >= 0.4",
         "setuptools_scm[toml] >= 4.1.2",
     ]
 }
 
-docs_url = "https://gramaziokohler.github.io/total_station_robot_localization"
-repo_url = "https://github.com/gramaziokohler/total_station_robot_localization"
+docs_url = "https://gramaziokohler.github.io/{}".format(pkg_name)
+repo_url = "https://github.com/gramaziokohler/{}".format(pkg_name)
 
 setuptools.setup(
-    name="total_station_robot_localization",
+    name=pkg_name,
     description="Robot localization using external measuring device (total station).",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -75,11 +78,11 @@ setuptools.setup(
         "Issues": repo_url + "/issues",
         "Documentation": docs_url,
     },
-    packages=setuptools.find_packages(where="."),
-    # package_dir={"": "total_station_robot_localization"},
+    packages=[pkg_name],
+    package_data={pkg_name: ["py.typed"]},
     include_package_data=True,
     zip_safe=False,
     install_requires=requirements,
     extras_require=extras_require,
-    python_requires=">=3.7",  # usage in IronPython is supported, see note in README
+    python_requires=">=3.8",  # usage in IronPython is supported, see note in README
 )

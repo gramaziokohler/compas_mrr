@@ -2,4 +2,4 @@
 API Reference
 ********************************************************************************
 
-.. automodule:: total_station_robot_localization
+.. automodule:: compas_mobile_robot_reloc

@@ -9,17 +9,20 @@ In short, this is how that works.
 
 ### Setup
 
-1. Fork [the repository](https://github.com/gramaziokohler/total_station_robot_localization) and clone the fork.
+1. Fork [the repository](https://github.com/gramaziokohler/compas_mobile_robot_reloc) and clone the fork.
 
 2. Create a virtual environment using your tool of choice (e.g. `virtualenv`, `conda`, etc).
 
     * Using [Anaconda](https://www.anaconda.com/)
 
     ```bash
+    # setup conda-forge
     conda config --add channels conda-forge
+    conda config --set channel_priority strict
+
     # use conda to install compas if possible
-    conda create -n total_station_robot_localization-dev python=3.8 compas==>=0.15.6, <0.16
-    conda activate total_station_robot_localization-dev
+    conda create -n compas_mobile_robot_reloc-dev python=3.8 compas==0.19.1
+    conda activate compas_mobile_robot_reloc-dev
     pip install -e .[dev]
     ```
 
@@ -34,7 +37,7 @@ In short, this is how that works.
 4. (Optional) Make package accessible in Rhino and Grasshopper
 
    ```bash
-   python -m total_station_robot_localization.rhino_install
+   python -m compas_rhino.install
    ```
 
 ### Make a pull request
