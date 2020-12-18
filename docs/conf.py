@@ -13,7 +13,7 @@ from compas_mobile_robot_reloc import __version__
 
 # -- General configuration ------------------------------------------------
 
-project = "Total station robot localization"
+project = "compas_mobile_robot_reloc"
 copyright = "Gramazio Kohler Research"
 author = "Anton T Johansson"
 version = release = __version__
@@ -96,7 +96,7 @@ html_theme = "compaspkg"
 html_theme_path = sphinx_compas_theme.get_html_theme_path()
 
 html_theme_options = {
-    "package_name": "compas_mobile_robot_reloc",
+    "package_name": project,
     "package_title": project,
     "package_version": release,
     "package_repo": "https://github.com/gramaziokohler/compas_mobile_robot_reloc",  # noqa: E501
