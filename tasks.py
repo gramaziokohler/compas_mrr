@@ -199,10 +199,13 @@ def release(ctx, new_version):
 
 
 @task(help="Writes version info to file. Used for builds.")
-def write_version():
+def write_version(ctx):
     from setuptools_scm import get_version
 
-    get_version(root=".", write_to="src/compas_mobile_robot_reloc/_version.py")
+    version_file_path = "src/compas_mobile_robot_reloc/_version.py"
+
+    log.write(f"Writing version info to {version_file_path}")
+    get_version(root=".", write_to=version_file_path)
 
 
 @contextlib.contextmanager
