@@ -11,13 +11,21 @@ from __future__ import print_function
 
 from os import path
 
+import compas
 import compas.plugins
+
+from .three_pts_localization import *  # noqa: F401, F403
+
+if not compas.RHINO:
+    from .arbitrary_pts_localization import *  # noqa: F401, F403
 
 PKG_ROOT = path.dirname(__file__)
 REPO_ROOT = path.abspath(path.join(PKG_ROOT, ".."))
 
+compas.PRECISION = "12f"
 
-def _get_version():
+
+def _get_version():  # type: () -> str
     # from https://smarie.github.io/python-getversion/#package-versioning-best-practices
     # and setuptools_scm docs
     try:
@@ -26,11 +34,11 @@ def _get_version():
 
         return version
     except ImportError:
-        from importlib.metadata import PackageNotFoundError
-        from importlib.metadata import version
-
         try:
-            return version("rapid-clay-formations-fab")
+            from importlib.metadata import PackageNotFoundError
+            from importlib.metadata import version  # type: ignore [no-redef]
+
+            return version("rapid-clay-formations-fab")  # type: ignore [operator]
         except PackageNotFoundError:
             # package is not installed
             pass

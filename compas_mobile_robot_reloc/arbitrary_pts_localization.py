@@ -24,7 +24,7 @@ from functools import reduce
 import numpy as np
 from scipy.optimize import minimize
 
-from compas_mobile_robot_reloc.utils import temp_change_compas_precision
+from compas_mobile_robot_reloc.utils import TYPE_CHECKING
 
 try:
     from pathlib import Path
@@ -34,8 +34,20 @@ except ImportError:
     else:
         raise
 
+if TYPE_CHECKING:
+    from typing import List
 
-def _objective_function(x, rcs_coords, wcs_coords):
+    from scipy.optimize import OptimizeResult
+
+
+__all__ = ["arbitrary_pts_localization"]
+
+
+def _objective_function(
+    x,  # type: List[float]
+    rcs_coords,  # type: List[List[float]]
+    wcs_coords,  # type: List[List[float]]
+):  # type: (...) -> float
     """Objective function for the optimization problem.
 
     Parameters
@@ -75,7 +87,7 @@ def _objective_function(x, rcs_coords, wcs_coords):
     return cost
 
 
-def _nonlinear_constraints(x):
+def _nonlinear_constraints(x):  # type: (List[float]) -> List[float]
     """Constraints for the optimization problem.
 
     Parameters
@@ -97,7 +109,7 @@ def _nonlinear_constraints(x):
     ]
 
 
-def _nonlinear_jacobian(x):
+def _nonlinear_jacobian(x):  # type: (List[float]) -> List[List[float]]
     """Jacobian for the constraints.
 
     Parameters
@@ -116,7 +128,11 @@ def _nonlinear_jacobian(x):
     ]
 
 
-def _plot(rcs_coords, wcs_coords, results):
+def _plot(
+    rcs_coords,  # type: List[List[float]]
+    wcs_coords,  # type: List[List[float]]
+    results,  # type: OptimizeResult
+):  # type: (...) -> None
     """Create plots to visualize multiple consecutive results from a solver."""
     import matplotlib.pyplot as plt
 
@@ -143,7 +159,12 @@ def _plot(rcs_coords, wcs_coords, results):
     plt.savefig(summary_file_path)
 
 
-def _plot_result(rcs_coords, wcs_coords, result, plot_dir):
+def _plot_result(
+    rcs_coords,  # type: np.ndarray
+    wcs_coords,  # type: np.ndarray
+    result,  # type: OptimizeResult
+    plot_dir,  # type: Path
+):  # type: (...) -> None
     """Create some plots that illustrate the result.
 
     Parameters
@@ -172,12 +193,12 @@ def _plot_result(rcs_coords, wcs_coords, result, plot_dir):
     # z_axis = origin + 1000 * z_vec
 
     # Calculate the localization points in the new coordinate system
-    transformed_points = []
+    _transformed_points = []
     for point in rcs_coords:
-        transformed_points.append(
+        _transformed_points.append(
             origin + point[0] * x_vec + point[1] * y_vec + point[2] * z_vec
         )
-    transformed_points = np.array(transformed_points)
+    transformed_points = np.array(_transformed_points)
 
     plt.figure()
     plt.plot(wcs_coords.T[0], wcs_coords.T[1], "bo")
@@ -213,8 +234,12 @@ def _plot_result(rcs_coords, wcs_coords, result, plot_dir):
     plt.savefig(plot_dir / "rcs_matching_yz.png")
 
 
-@temp_change_compas_precision("12f")
-def arbitrary_pts_localization(rcs_coords, wcs_coords, plot_results=False, maxiter=100):
+def arbitrary_pts_localization(
+    rcs_coords,  # type: List[List[float]]
+    wcs_coords,  # type: List[List[float]]
+    plot_results=False,  # type: bool
+    maxiter=200,  # type: int
+):  # type: (...) -> List[List[float]]
     """Calculate the RCS origin frame.
 
     Finding the origin is formulated as an optimization problem where we want
@@ -232,10 +257,10 @@ def arbitrary_pts_localization(rcs_coords, wcs_coords, plot_results=False, maxit
 
     Parameters
     ----------
-    rcs_coords : :obj:`tuple` of :obj:`float`
+    rcs_coords
         The points where the robot endeffector was positioned to take
         measurements. These points are in the RCS.
-    wcs_coords : :obj:`tuple` of :obj:`float`
+    wcs_coords
         The measurements taken in the world coordinate system (WCS) with the
         total station. These are the coordinates of the rcs_coords in
         the WCS.

@@ -16,39 +16,33 @@ import compas
 import compas.geometry as cg
 
 try:
-    from typing import List
-except ImportError:
-    pass
-
-try:
     import Rhino.Geometry as rg
 except ImportError:
     pass
 
 
 def _ensure_rhino():  # type: () -> None
-    try:
-        import Rhino  # noqa: F401
-    except ImportError:
+    if not compas.RHINO:
         raise Exception("Can't import Rhino in current environment.")
 
 
-def temp_change_compas_precision(precision):
-    """Decorate function to run with specified compas.PRECISION."""
+def _is_type_checking():  # type: () -> bool
+    try:
+        import typing  # noqa: F401
 
-    def decorator(func):
-        def wrapped_func(*args, **kwargs):
-            prev_precision = compas.PRECISION
-            compas.PRECISION = precision
+        if typing.TYPE_CHECKING:
+            return True
 
-            result = func(*args, **kwargs)
+    except ImportError:
+        pass
 
-            compas.PRECISION = prev_precision
-            return result
+    return False
 
-        return wrapped_func
 
-    return decorator
+TYPE_CHECKING = _is_type_checking()  # type: bool
+
+if TYPE_CHECKING:
+    from typing import List
 
 
 def rgpoint_to_cgpoint(pt):
@@ -67,11 +61,18 @@ def rgpoint_to_cgpoint(pt):
     return cg.Point(pt.X, pt.Y, pt.Z)
 
 
+def cgframe_to_rgplane(frame):  # type: (compas.geometry.Frame) -> rg.Plane
+    """Convert :class:`compas.Geometry.Frame` to :class:`Rhino.Geometry.Plane`."""  # noqa: E501
+    origin = rg.Point3d(*list(frame.point))
+    x_vec = rg.Vector3d(*list(frame.xaxis))
+    y_vec = rg.Vector3d(*list(frame.yaxis))
+
+    return rg.Plane(origin, x_vec, y_vec)
+
+
 def rgtransform_to_cgtransformation(rgT):
     # type: (rg.Transform) -> cg.Transformation
     """Convert :class:`Rhino.Geometry.Transform` to :class:`compas.geometry.Transformation`."""  # noqa: E501
-    _ensure_rhino()
-
     M = rgtransform_to_matrix(rgT)
     return cg.Transformation.from_matrix(M)
 
@@ -94,6 +95,7 @@ def cgtransformation_to_rgtransform(cgT):
 def matrix_to_rgtransform(M):  # type: (List[List[float]]) -> rg.Transform
     """Create :class:`Rhino.Geometry.Transform` from a transformation matrix."""
     _ensure_rhino()
+
     rgT = rg.Transform()
 
     for i, row in enumerate(M):
