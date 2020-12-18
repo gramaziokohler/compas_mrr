@@ -8,7 +8,7 @@ on:
       - v[0-9].[0-9]+.[0-9]+
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -31,7 +31,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install cython --install-option="--no-cython-compile"
           python -m pip install --no-cache-dir -e .[dev]
-          python -c "from setuptools_scm import get_version;get_version('.', write_to='total_station_robot_localization/_version.py')"
+          python -c "from setuptools_scm import get_version;get_version('.', write_to='compas_mobile_robot_reloc/_version.py')"
 
       -
         name: Test
