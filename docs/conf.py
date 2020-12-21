@@ -4,37 +4,22 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-# If your documentation needs a minimal Sphinx version, state it here.
 import sphinx_compas_theme
 
-#
-# needs_sphinx = "1.0"
 from compas_mobile_robot_reloc import __version__
 
-# -- General configuration ------------------------------------------------
-
-project = "compas_mobile_robot_reloc"
+pkg_name = "compas_mobile_robot_reloc"
+project = "COMPAS Mobile Robot Relocalization"
 copyright = "Gramazio Kohler Research"
 author = "Anton T Johansson"
 version = release = __version__
 
-master_doc = "index"
-
 source_suffix = {".rst": "restructuredtext", ".md": "markdown"}
-templates_path = [
-    "_templates",
-]
-exclude_patterns: list = []
+templates_path = ["_templates"]
 
-pygments_style = "sphinx"
-show_authors = True
-add_module_names = True
-language = None
-
-# -- Extension configuration ------------------------------------------------
 
 extensions = [
-    "recommonmark",
+    "m2r2",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.doctest",
@@ -43,8 +28,9 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
-    "matplotlib.sphinxext.plot_directive",
 ]
+
+# Extension conf
 
 # autodoc options
 autodoc_default_options = {
@@ -58,30 +44,9 @@ autodoc_default_options = {
 autodoc_mock_imports = ["Rhino"]
 autodoc_member_order = "alphabetical"
 
-autoclass_content = "class"
+autoclass_content = "class"  # don't include __init__ docstring
 
-
-# autosummary options
-
-autosummary_generate = True
-
-# napoleon options
-
-napoleon_google_docstring = True
-napoleon_numpy_docstring = True
-napoleon_include_init_with_doc = False
-napoleon_include_private_with_doc = False
-napoleon_include_special_with_doc = True
-napoleon_use_admonition_for_examples = False
-napoleon_use_admonition_for_notes = False
-napoleon_use_admonition_for_references = False
-napoleon_use_ivar = False
-napoleon_use_param = False
-napoleon_use_rtype = False
-
-
-# intersphinx options
-
+# intersphinx
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", "https://docs.python.org/3/objects.inv"),
     "compas": (
@@ -90,24 +55,17 @@ intersphinx_mapping = {
     ),
 }
 
-# -- Options for HTML output ----------------------------------------------
-
+# HTML output conf
 html_theme = "compaspkg"
 html_theme_path = sphinx_compas_theme.get_html_theme_path()
 
 html_theme_options = {
-    "package_name": project,
+    "package_name": pkg_name,
     "package_title": project,
-    "package_version": release,
-    "package_repo": "https://github.com/gramaziokohler/compas_mobile_robot_reloc",  # noqa: E501
+    "package_version": version,
+    "package_repo": f"https://github.com/gramaziokohler/{pkg_name}",
+    "package_docs": f"https://gramaziokohler.github.io/{pkg_name}",
 }
 
-html_context: dict = {}
-html_static_path: list = []
-html_extra_path = [".nojekyll"]
-html_last_updated_fmt = ""
-html_copy_source = False
-html_show_sourcelink = True
-html_add_permalinks = ""
+html_copy_source = True
 html_experimental_html5_writer = True
-html_compact_lists = True

@@ -1,34 +1,19 @@
-********************************************************************************
-compas_mobile_robot_reloc
-********************************************************************************
+.. mdinclude:: ../README.md
 
-COMPAS
-======
+.. image in README.md not rendered, see https://github.com/CrossNox/m2r2/issues/18 and 8
 
-compas_mobile_robot_reloc uses ``compas_`` for geometrical operations.
 
-Note on compatibility
-=====================
-
-Installation of the package requires Python \>\= 3.8.
-
-Big parts are compatible with IronPython 2.7 (to be run inside Rhino plugin
-Grasshopper).
-
-The modules that require Python \>\= 3.8 should raise an exception on import.
-
-Documentation
-=============
+Table of contents
+-----------------
 
 .. toctree::
-   :maxdepth: 3
    :titlesonly:
 
    installation
    usage
-   contributing
    reference
-   changelog
-   license
+   contributing
 
-.. _`compas`: https://compas.dev/
+.. mdinclude:: ../CHANGELOG.md
+
+.. literalinclude:: ../LICENSE

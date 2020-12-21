@@ -6,7 +6,6 @@ API reference
    :maxdepth: 1
    :titlesonly:
 
-   reference/compas_mobile_robot_reloc
    reference/compas_mobile_robot_reloc.three_pts_localization
    reference/compas_mobile_robot_reloc.arbitrary_pts_localization
    reference/compas_mobile_robot_reloc.xforms
