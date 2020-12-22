@@ -1,7 +1,8 @@
-.. mdinclude:: ../README.md
+==============================================================================
+COMPAS Mobile Robot Relocalization
+==============================================================================
 
-.. image in README.md not rendered, see https://github.com/CrossNox/m2r2/issues/18 and 8
-
+Robot localization using external measuring device (total station).
 
 Table of contents
 -----------------
@@ -14,6 +15,17 @@ Table of contents
    reference
    contributing
 
+README
+------
+
+.. mdinclude:: ../README.md
+   :start-line: 4
+
+.. image in README.md not rendered, see https://github.com/CrossNox/m2r2/issues/18 and 8
+
 .. mdinclude:: ../CHANGELOG.md
+
+License
+-------
 
 .. literalinclude:: ../LICENSE
