@@ -67,6 +67,6 @@ html_theme_options = {
     "package_docs": f"https://gramaziokohler.github.io/{pkg_name}",
 }
 
-html_add_permalinks = None
+html_add_permalinks = ""
 html_copy_source = True
 html_experimental_html5_writer = True

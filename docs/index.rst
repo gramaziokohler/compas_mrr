@@ -14,12 +14,14 @@ Table of contents
    usage
    reference
    contributing
+   changelog
+   license
 
 README
 ------
 
 .. mdinclude:: ../README.md
-   :start-line: 4
+   :start-line: 5
 
 .. image in README.md not rendered, see https://github.com/CrossNox/m2r2/issues/18 and 8
 
