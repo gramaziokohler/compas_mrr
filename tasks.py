@@ -198,8 +198,9 @@ def release(ctx, new_version):
     prepare_changelog(ctx)
 
 
-@task(help="Writes version info to file. Used for builds.")
+@task
 def write_version(ctx):
+    """Writes version info to file. Used for builds."""
     from setuptools_scm import get_version
 
     version_file_path = "src/compas_mobile_robot_reloc/_version.py"
