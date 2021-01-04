@@ -1,13 +1,11 @@
 # Changelog
 
-## Unreleased
+## 2021-01-04 - 1.0.2
 
-### Added
-
-### Changed
-
-### Removed
-
+No changes, version bumped to give give a clear indication of which conda
+package to use. (Lingering package
+[compas-mobile-robot-reloc](https://anaconda.org/conda-forge/compas-mobile-robot-reloc)
+on conda forge.)
 
 ## 2020-12-18 - 1.0.1
 
