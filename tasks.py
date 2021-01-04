@@ -62,13 +62,13 @@ def help(ctx):
         "builds": "True to clean up build/packaging artifacts, otherwise False.",
     }
 )
-def clean(ctx, clean_docs=True, clean_bytecode=True, clean_builds=True):
+def clean(ctx, docs=True, bytecode=True, builds=True):
     """Clean the local copy from compiled artifacts."""
     with chdir(BASE_FOLDER):
-        if clean_builds:
+        if builds:
             ctx.run("python setup.py clean")
 
-        if clean_bytecode:
+        if bytecode:
             for root, dirs, files in os.walk(BASE_FOLDER):
                 for f in files:
                     if f.endswith(".pyc"):
@@ -78,16 +78,16 @@ def clean(ctx, clean_docs=True, clean_bytecode=True, clean_builds=True):
 
         folders = []
 
-        if clean_docs:
+        if docs:
             folders.append(BASE_FOLDER / "docs/reference")
 
         folders.append(OUT_DIR)
 
-        if clean_bytecode:
+        if bytecode:
             for t in ("src", "tests"):
                 folders += BASE_FOLDER.joinpath(t).glob("**/__pycache__")
 
-        if clean_builds:
+        if builds:
             folders.append(BASE_FOLDER / "src/rapid_clay_formations_fab.egg-info/")
 
         for folder in folders:
@@ -133,8 +133,9 @@ def check(ctx):
 
 @task(
     help={
-        "checks": "True to run all checks before testing, otherwise False.",
         "verbose": "Run pytest with -vv level verbosity.",
+        "checks": "True to run all checks before testing, otherwise False.",
+        "doctest": "Run doctests as well.",
     }
 )
 def test(ctx, checks=False, doctest=False, verbose=True):
