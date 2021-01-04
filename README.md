@@ -4,7 +4,7 @@ Robot localization using external measuring device (total station).
 
 ![Build and test](https://github.com/gramaziokohler/compas_mobile_robot_reloc/workflows/workflow/badge.svg)
 [![PyPI Package latest release](https://img.shields.io/pypi/v/compas_mobile_robot_reloc.svg)](https://pypi.org/project/compas-mobile-robot-reloc)
-[![Conda](https://img.shields.io/conda/v/conda-forge/compas_mobile_robot_reloc)](https://anaconda.org/conda_forge/compas_mobile_robot_reloc)
+[![Conda](https://img.shields.io/conda/v/conda-forge/compas_mobile_robot_reloc)](https://anaconda.org/conda-forge/compas_mobile_robot_reloc)
 ![License](https://img.shields.io/github/license/gramaziokohler/rapid_clay_formations_fab)
 
 ![Image of total station and robot setup in Brunnen](docs/images/total_station_brunnen.png)
