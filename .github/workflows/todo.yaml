@@ -3,13 +3,13 @@ name: "Issues from todo comments"
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   todo:
     runs-on: "ubuntu-latest"
     steps:
-      - uses: "actions/checkout@master"
+      - uses: "actions/checkout@v2"
       - name: "TODO to Issue"
         uses: "alstr/todo-to-issue-action@v2.4.1"
         with:
