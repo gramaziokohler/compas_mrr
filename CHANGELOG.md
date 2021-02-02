@@ -1,5 +1,10 @@
 # Changelog
 
+## 2021-02-01 - 1.0.3
+
+### Changed
+* Bumped compas to `<2.0`.
+
 ## 2021-01-04 - 1.0.2
 
 No changes, version bumped to give give a clear indication of which conda
