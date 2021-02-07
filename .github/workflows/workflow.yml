@@ -1,6 +1,6 @@
 name: workflow
 
-on: ['push']
+on: push
 
 jobs:
   build:
@@ -13,8 +13,11 @@ jobs:
         experimental: [false]
         compas-version-specifier: [false]
         include:
-          - compas-version-specifier: ==0.17.2
+          -
+            os: windows-latest
+            python-version: 3.7
             experimental: true
+            compas-version-specifier: ==0.17.2
 
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
@@ -46,13 +49,11 @@ jobs:
 
       -
         name: Test
-        run: |
-          invoke test
+        run: invoke test
 
       -
         name: Build docs
-        run: |
-          invoke docs
+        run: invoke docs
 
       -
         name: Upload docs for other jobs
@@ -66,8 +67,7 @@ jobs:
 
       -
         name: Build package
-        run: |
-          invoke build
+        run: invoke build
 
       -
         name: Check if semver-tag
