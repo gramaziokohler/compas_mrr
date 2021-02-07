@@ -47,6 +47,7 @@ jobs:
           python -m pip install cython --install-option='--no-cython-compile'
           if [ -z $COMPAS_VERSION_SPECIFIER ] ; then
             python -m pip install "compas$COMPAS_VERSION_SPECIFIER"
+          fi
           python -m pip install --no-cache-dir -e .[dev]
 
       -
