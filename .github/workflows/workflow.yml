@@ -24,8 +24,6 @@ jobs:
           -
             compas-version-specifier: '==0.17.2'
             experimental: true
-    env:
-      COMPAS_VERSION_SPECIFIER: ${{ matrix.compas-version-specifier }}
     continue-on-error: ${{ matrix.experimental }}
     steps:
       -
@@ -49,6 +47,8 @@ jobs:
             python -m pip install "compas$COMPAS_VERSION_SPECIFIER"
           fi
           python -m pip install --no-cache-dir -e .[dev]
+        env:
+          COMPAS_VERSION_SPECIFIER: ${{ matrix.compas-version-specifier }}
 
       -
         name: Test
