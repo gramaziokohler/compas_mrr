@@ -6,17 +6,18 @@ jobs:
   build:
     name: Install and build
     runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
+      fail-fast: false
       matrix:
         os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
         python-version: ['3.7', '3.8', '3.9']
         experimental: [false]
-        compas-version-specifier: ['']
+        compas-version-specifier: ['false']
         include:
           -
             compas-version-specifier: '==0.17.2'
             experimental: true
-    continue-on-error: ${{ matrix.experimental }}
     steps:
       -
         name: Checkout repo
@@ -35,7 +36,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install wheel  # https://stackoverflow.com/questions/34819221
           python -m pip install cython --install-option='--no-cython-compile'
-          if [ -z $COMPAS_VERSION_SPECIFIER ] ; then
+          if [[ $COMPAS_VERSION_SPECIFIER != 'false' ]] ; then
             python -m pip install "compas$COMPAS_VERSION_SPECIFIER"
           fi
           python -m pip install --no-cache-dir -e .[dev]
