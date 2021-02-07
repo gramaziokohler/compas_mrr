@@ -14,7 +14,7 @@ jobs:
         include:
           -
             os: windows-latest
-            python-version: [3.7]
+            python-version: 3.7
             compas-version-specifier: ==0.17.2
 
     steps:
