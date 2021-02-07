@@ -5,8 +5,6 @@ on: ['push']
 jobs:
   build:
     name: Install and build
-    runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
@@ -15,9 +13,12 @@ jobs:
         experimental: [false]
         compas-version-specifier: [false]
         include:
-          -
-            compas-version-specifier: ==0.17.2
+          - compas-version-specifier: ==0.17.2
             experimental: true
+
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
+
     steps:
       -
         name: Checkout repo
