@@ -19,11 +19,14 @@ jobs:
         os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
         python-version: ['3.7', '3.8', '3.9']
         experimental: [false]
-        compas-install-cmd: ['']
+        compas-version-specifier: ['']
         include:
           -
-            compas-install-cmd: python -m pip install compas==0.17.2
+            compas-version-specifier: '==0.17.2'
             experimental: true
+    env:
+      COMPAS_VERSION_SPECIFIER: ${{ matrix.compas-version-specifier }}
+    continue-on-error: ${{ matrix.experimental }}
     steps:
       -
         name: Checkout repo
@@ -37,11 +40,13 @@ jobs:
 
       -
         name: Install
+        shell: bash
         run: |
           python -m pip install --upgrade pip
           python -m pip install wheel  # https://stackoverflow.com/questions/34819221
           python -m pip install cython --install-option='--no-cython-compile'
-          ${{ matrix.compas-install-cmd }}
+          if [ -z $COMPAS_VERSION_SPECIFIER ] ; then
+            python -m pip install "compas$COMPAS_VERSION_SPECIFIER"
           python -m pip install --no-cache-dir -e .[dev]
 
       -
@@ -141,4 +146,3 @@ jobs:
           files: |
             dist/*.whl
             dist/*.tar.gz
-  continue-on-error: ${{ matrix.experimental }}
