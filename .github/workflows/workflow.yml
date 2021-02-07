@@ -5,22 +5,17 @@ on: push
 jobs:
   build:
     name: Install and build
+    runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: [3.7, 3.8, 3.9]
-        experimental: [false]
+        python-version: [3.7, 3.8]
         compas-version-specifier: [false]
         include:
           -
             os: windows-latest
-            python-version: 3.7
-            experimental: true
+            python-version: [3.7]
             compas-version-specifier: ==0.17.2
-
-    runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.experimental }}
 
     steps:
       -
