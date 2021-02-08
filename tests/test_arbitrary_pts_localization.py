@@ -2,14 +2,16 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import compas.geometry as cg
-import pytest
 from compas.rpc import Proxy
+from compas.geometry import Point
+from pytest import approx
+from pytest import fixture
+import numpy as np
 
 from compas_mobile_robot_reloc import arbitrary_pts_localization
 
 
-@pytest.fixture
+@fixture
 def wcs_pts():
     coords = [
         [15402.885, 24560.608, 1046.399],
@@ -22,10 +24,10 @@ def wcs_pts():
         [18539.657, 25105.912, 2822.457],
         [17748.109, 25368.456, 2296.253],
     ]
-    return [cg.Point(*c) for c in coords]
+    return [Point(*c) for c in coords]
 
 
-@pytest.fixture
+@fixture
 def rcs_pts():
 
     coords = [
@@ -39,26 +41,30 @@ def rcs_pts():
         [499.173, 1232.814, 1660.649],
         [-333.942, 1232.847, 1134.185],
     ]
-    return [cg.Point(*c) for c in coords]
+    return [Point(*c) for c in coords]
 
 
-@pytest.fixture
-def result():
-    return [
-        [17673.89407916199, 24090.40347105736, 1155.641624491002],
-        [0.9483996822978297, -0.31707722416843803, 0.00027664240605984673],
-        [0.31707732099309044, 0.9483995884228106, -0.0004395353553828809],
-    ]
+@fixture
+def approx_result():
+    return approx(
+        np.array(
+            [
+                [17673.89407916199, 24090.40347105736, 1155.641624491002],
+                [0.9483996822978297, -0.31707722416843803, 0.00027664240605984673],
+                [0.31707732099309044, 0.9483995884228106, -0.0004395353553828809],
+            ]
+        )
+    )
 
 
-def test_arbitrary_pts_localization(wcs_pts, rcs_pts, result):
-    assert arbitrary_pts_localization(rcs_pts, wcs_pts) == result
+def test_arbitrary_pts_localization(wcs_pts, rcs_pts, approx_result):
+    assert arbitrary_pts_localization(rcs_pts, wcs_pts) == approx_result
 
 
-def test_proxy(wcs_pts, rcs_pts, result):
+def test_proxy(wcs_pts, rcs_pts, approx_result):
     with Proxy(
         "compas_mobile_robot_reloc.arbitrary_pts_localization", python="python"
     ) as proxy:
         result_ = proxy.arbitrary_pts_localization(rcs_pts, wcs_pts)
 
-    assert result_ == result
+    assert result_ == approx_result
