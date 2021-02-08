@@ -46,25 +46,22 @@ def rcs_pts():
 
 @fixture
 def approx_result():
-    return approx(
-        np.array(
-            [
-                [17673.89407916199, 24090.40347105736, 1155.641624491002],
-                [0.9483996822978297, -0.31707722416843803, 0.00027664240605984673],
-                [0.31707732099309044, 0.9483995884228106, -0.0004395353553828809],
-            ]
-        )
-    )
+    return [
+        [17673.8941, 24090.4035, 1155.6416],
+        [0.9484, -0.3171, 0.0003],
+        [0.3171, 0.9484, -0.0004],
+    ]
 
 
 def test_arbitrary_pts_localization(wcs_pts, rcs_pts, approx_result):
-    assert arbitrary_pts_localization(rcs_pts, wcs_pts) == approx_result
+    result = arbitrary_pts_localization(rcs_pts, wcs_pts)
+    assert result == approx(np.array(approx_result), rel=1e-4, abs=1e-4)
 
 
 def test_proxy(wcs_pts, rcs_pts, approx_result):
     with Proxy(
         "compas_mobile_robot_reloc.arbitrary_pts_localization", python="python"
     ) as proxy:
-        result_ = proxy.arbitrary_pts_localization(rcs_pts, wcs_pts)
+        result = proxy.arbitrary_pts_localization(rcs_pts, wcs_pts)
 
-    assert result_ == approx_result
+    assert result == approx(np.array(approx_result), rel=1e-4, abs=1e-4)
