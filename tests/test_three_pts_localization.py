@@ -2,10 +2,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from compas import IPY
 from compas.geometry import Point
 from compas.geometry import Frame
 from compas.geometry import Vector
-from pytest import approx
 from pytest import fixture
 
 from compas_mobile_robot_reloc import three_pts_localization
@@ -63,6 +63,13 @@ def test__coerce_frame(pts_defining_orthogonal_frame, orthogonal_frame):
 def test_three_pts_localization(rcs_coords, wcs_coords, example_pt_rcs, example_pt_wcs):
     robot_base_wcs = three_pts_localization(rcs_coords, wcs_coords)
 
-    computed_arbitrary_pt_wcs = robot_base_wcs.to_local_coordinates(example_pt_rcs)
+    transformed_pt = robot_base_wcs.to_local_coordinates(example_pt_rcs)
 
-    assert list(computed_arbitrary_pt_wcs) == approx(list(example_pt_wcs))
+    if IPY:
+        rounded_transformed_pt = [round(c, 2) for c in list(transformed_pt)]
+        rounded_example_pt = [round(c, 2) for c in list(example_pt_wcs)]
+        assert rounded_transformed_pt == rounded_example_pt
+    else:
+        from pytest import approx
+
+        assert list(transformed_pt) == approx(list(example_pt_wcs))
