@@ -12,24 +12,20 @@ jobs:
         python-version: [3.7, 3.8]
         compas-version-specifier: [false]
         include:
-          -
-            os: windows-latest
+          - os: windows-latest
             python-version: 3.7
             compas-version-specifier: ==0.17.2
 
     steps:
-      -
-        name: Checkout repo
+      - name: Checkout repo
         uses: actions/checkout@v2
 
-      -
-        name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
 
-      -
-        name: Install
+      - name: Install
         shell: bash
         run: |
           python -m pip install --upgrade pip
@@ -42,16 +38,16 @@ jobs:
         env:
           COMPAS_VERSION_SPECIFIER: ${{ matrix.compas-version-specifier }}
 
-      -
-        name: Test
+      - name: Test import
+        run: python -m compas_mobile_robot_reloc
+
+      - name: Test
         run: invoke test
 
-      -
-        name: Build docs
+      - name: Build docs
         run: invoke docs
 
-      -
-        name: Upload docs for other jobs
+      - name: Upload docs for other jobs
         uses: actions/upload-artifact@v2
         if: matrix.python-version == '3.8' && matrix.os == 'ubuntu-latest'
         with:
@@ -60,12 +56,10 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-      -
-        name: Build package
+      - name: Build package
         run: invoke build
 
-      -
-        name: Check if semver-tag
+      - name: Check if semver-tag
         id: check-tag
         shell: bash
         run: |
@@ -73,8 +67,7 @@ jobs:
               echo ::set-output name=match::true
           fi
 
-      -
-        name: Upload package artifacts for other jobs
+      - name: Upload package artifacts for other jobs
         uses: actions/upload-artifact@v2
         if: >-
           steps.check-tag.outputs.match == 'true' &&
@@ -94,15 +87,13 @@ jobs:
     if: github.event_name == 'push' && ! startsWith(github.ref, 'refs/tags')
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Download docs directory from build job
+      - name: Download docs directory from build job
         uses: actions/download-artifact@v2
         with:
           name: docs-dir
           path: docs
 
-      -
-        name: Publish docs on branch gh-pages
+      - name: Publish docs on branch gh-pages
         uses: crazy-max/ghaction-github-pages@v2
         with:
           target_branch: gh-pages
@@ -117,26 +108,22 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
     steps:
-      -
-        name: Checkout code  # This is needed for creating release on GitHub
+      - name: Checkout code # This is needed for creating release on GitHub
         uses: actions/checkout@v2
 
-      -
-        name: Download dist directory from build job
+      - name: Download dist directory from build job
         uses: actions/download-artifact@v2
         with:
           name: dist-files
           path: dist
 
-      -
-        name: Upload and release package on PyPi
+      - name: Upload and release package on PyPi
         uses: pypa/gh-action-pypi-publish@master
         with:
           user: __token__
           password: ${{ secrets.pypi_password }}
 
-      -
-        name: Create GitHub release and upload assets
+      - name: Create GitHub release and upload assets
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

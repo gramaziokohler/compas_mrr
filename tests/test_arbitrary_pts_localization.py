@@ -2,13 +2,16 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from compas import IPY
 from compas.rpc import Proxy
 from compas.geometry import Point
-from pytest import approx
 from pytest import fixture
-import numpy as np
 
-from compas_mobile_robot_reloc import arbitrary_pts_localization
+if not IPY:
+    import numpy as np
+    from pytest import approx
+
+    from compas_mobile_robot_reloc import arbitrary_pts_localization
 
 
 @fixture
@@ -54,6 +57,9 @@ def approx_result():
 
 
 def test_arbitrary_pts_localization(wcs_pts, rcs_pts, approx_result):
+    if IPY:
+        return
+
     result = arbitrary_pts_localization(rcs_pts, wcs_pts)
     assert result == approx(np.array(approx_result), rel=1e-4, abs=1e-4)
 
@@ -64,4 +70,8 @@ def test_proxy(wcs_pts, rcs_pts, approx_result):
     ) as proxy:
         result = proxy.arbitrary_pts_localization(rcs_pts, wcs_pts)
 
-    assert result == approx(np.array(approx_result), rel=1e-4, abs=1e-4)
+    if IPY:
+        rounded_result = [[round(v, 4) for v in list_] for list_ in result]
+        assert rounded_result == approx_result
+    else:
+        assert result == approx(np.array(approx_result), rel=1e-4, abs=1e-4)

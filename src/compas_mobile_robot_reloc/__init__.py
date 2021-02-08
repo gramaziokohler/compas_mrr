@@ -11,7 +11,7 @@ import compas.plugins
 from .measurement_point import *  # noqa: F401, F403
 from .three_pts_localization import *  # noqa: F401, F403
 
-if not compas.RHINO:
+if not compas.IPY:
     from .arbitrary_pts_localization import *  # noqa: F401, F403
 
 PKG_ROOT = path.dirname(__file__)
