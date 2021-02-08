@@ -14,7 +14,7 @@ except ImportError:
 
 def _ensure_rhino():  # type: () -> None
     if not compas.RHINO:
-        raise Exception("Can't import Rhino in current environment.")
+        raise ImportError("Can't import Rhino in current environment.")
 
 
 def _is_type_checking():  # type: () -> bool
