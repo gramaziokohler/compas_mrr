@@ -3,10 +3,14 @@ from __future__ import division
 from __future__ import print_function
 
 from compas.geometry import Point
+from compas.geometry import Frame
+from compas.geometry import Vector
 from pytest import approx
 from pytest import fixture
 
 from compas_mobile_robot_reloc import three_pts_localization
+from compas_mobile_robot_reloc.three_pts_localization import _coerce_frame
+from compas_mobile_robot_reloc.three_pts_localization import _pts_to_frame
 
 
 @fixture
@@ -28,20 +32,37 @@ def wcs_coords():
 
 
 @fixture
-def arbitrary_pt_rcs():
+def example_pt_rcs():
     return Point(1000, 1250, 1500)
 
 
 @fixture
-def arbitrary_pt_wcs():
+def example_pt_wcs():
     return Point(21910.426861, 15663.519267, -2714.911982)
 
 
-def test_three_pts_localization(
-    rcs_coords, wcs_coords, arbitrary_pt_rcs, arbitrary_pt_wcs
-):
+@fixture
+def pts_defining_orthogonal_frame(example_pt_rcs):
+    return [example_pt_rcs, Point(2000, 1250, 1500), Vector(1000, 2250, 1500)]
+
+
+@fixture
+def orthogonal_frame(example_pt_rcs):
+    return Frame(example_pt_rcs, Point(1, 0, 0), Vector(0, 1, 0))
+
+
+def test__pts_to_frame(pts_defining_orthogonal_frame, orthogonal_frame):
+    assert _pts_to_frame(pts_defining_orthogonal_frame) == orthogonal_frame
+
+
+def test__coerce_frame(pts_defining_orthogonal_frame, orthogonal_frame):
+    assert _coerce_frame(pts_defining_orthogonal_frame) == orthogonal_frame
+    assert _coerce_frame(orthogonal_frame) == orthogonal_frame
+
+
+def test_three_pts_localization(rcs_coords, wcs_coords, example_pt_rcs, example_pt_wcs):
     robot_base_wcs = three_pts_localization(rcs_coords, wcs_coords)
 
-    computed_arbitrary_pt_wcs = robot_base_wcs.to_local_coordinates(arbitrary_pt_rcs)
+    computed_arbitrary_pt_wcs = robot_base_wcs.to_local_coordinates(example_pt_rcs)
 
-    assert list(computed_arbitrary_pt_wcs) == approx(list(arbitrary_pt_wcs))
+    assert list(computed_arbitrary_pt_wcs) == approx(list(example_pt_wcs))

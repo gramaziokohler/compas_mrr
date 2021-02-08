@@ -1,8 +1,4 @@
-"""
-********************************************************************************
-Three points method for robot relocalization.
-********************************************************************************
-"""
+"""Three points method for robot relocalization"""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function

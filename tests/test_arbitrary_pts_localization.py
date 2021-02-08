@@ -6,6 +6,8 @@ import compas.geometry as cg
 import pytest
 from compas.rpc import Proxy
 
+from compas_mobile_robot_reloc import arbitrary_pts_localization
+
 
 @pytest.fixture
 def wcs_pts():
@@ -40,10 +42,23 @@ def rcs_pts():
     return [cg.Point(*c) for c in coords]
 
 
-def test_proxy(wcs_pts, rcs_pts):
+@pytest.fixture
+def result():
+    return [
+        [17673.89407916199, 24090.40347105736, 1155.641624491002],
+        [0.9483996822978297, -0.31707722416843803, 0.00027664240605984673],
+        [0.31707732099309044, 0.9483995884228106, -0.0004395353553828809],
+    ]
+
+
+def test_arbitrary_pts_localization(wcs_pts, rcs_pts, result):
+    assert arbitrary_pts_localization(rcs_pts, wcs_pts) == result
+
+
+def test_proxy(wcs_pts, rcs_pts, result):
     with Proxy(
         "compas_mobile_robot_reloc.arbitrary_pts_localization", python="python"
     ) as proxy:
-        result = proxy.arbitrary_pts_localization(rcs_pts, wcs_pts)
-        print(type(result))
-        print(cg.Frame(*result))
+        result_ = proxy.arbitrary_pts_localization(rcs_pts, wcs_pts)
+
+    assert result_ == result

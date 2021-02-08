@@ -1,8 +1,24 @@
 # Changelog
 
+<!-- markdownlint-disable-file MD024 -->
+
+## Unreleased
+
+### Changed
+
+* `MeasurementPoint` moved to its own module and made available as second level
+import (`compas_mobile_robot_reloc.MeasurementPoint`).
+
+## 20201-02-08 - 1.0.4
+
+### Changed
+
+* Dependency version specifier for compas' low bound set to `0.17.2`.
+
 ## 2021-02-01 - 1.0.3
 
 ### Changed
+
 * Bumped compas to `<2.0`.
 
 ## 2021-01-04 - 1.0.2
@@ -15,6 +31,7 @@ on conda forge.)
 ## 2020-12-18 - 1.0.1
 
 ### Added
+
 * Moved MeasurementPoint from grasshopper document to `compas_mobile_robot_reloc.utils`.
 
 ## 2020-12-18 - 1.0.0

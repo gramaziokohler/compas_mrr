@@ -1,8 +1,4 @@
-"""
-********************************************************************************
-Transformations
-********************************************************************************
-"""
+"""Transformations"""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -48,11 +44,10 @@ def _coerce_cg_xform(xform):  # type: (Any) -> cg.Transformation
     if isinstance(xform, Sequence):
         try:
             T = cg.Transformation.from_matrix(xform)
-            T.decomposed()
-        except TypeError:
-            raise TypeError("Couldn't convert {} to Transformation".format(type(xform)))
-        else:
+            T.decomposed()  # raises type error on invalid T
             return T
+        except TypeError:
+            pass
 
     raise TypeError(
         "Can't convert {} to compas.geometry.Transformation".format(type(xform))

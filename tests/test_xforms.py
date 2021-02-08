@@ -5,7 +5,7 @@ from __future__ import print_function
 from compas.geometry import Frame
 from compas.geometry import Transformation
 from numpy import array
-from pytest import approx
+import pytest
 from pytest import fixture
 
 from compas_mobile_robot_reloc.xforms import _coerce_cg_xform
@@ -45,12 +45,22 @@ def test__coerce_cg_xform_ndarray(rcf_matrix):
     assert isinstance(_coerce_cg_xform(_array), Transformation)
 
 
+def test__coerce_cg_xform_none():
+    with pytest.raises(TypeError):
+        _coerce_cg_xform(None)
+
+
+def test__coerce_cg_xform_invalid_sequence():
+    with pytest.raises(TypeError):
+        _coerce_cg_xform([None])
+
+
 def test_worldxy_to_robot_base_xform(rcf, rcf_xform):
     print(Transformation.from_frame(rcf))
     assert worldxy_to_robot_base_xform(rcf) == rcf_xform
 
 
 def test_xform_to_xyz_quaternion(rcf_matrix):
-    assert xform_to_xyz_quaternion(rcf_matrix) == approx(
+    assert xform_to_xyz_quaternion(rcf_matrix) == pytest.approx(
         [-100, -100, 100, 0.707, -0.707, 0, 0], abs=1e-03
     )

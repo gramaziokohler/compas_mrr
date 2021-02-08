@@ -133,12 +133,13 @@ def check(ctx):
 
 @task(
     help={
-        "verbose": "Run pytest with -vv level verbosity.",
         "checks": "True to run all checks before testing, otherwise False.",
+        "coverage": "True to generate coverage report using pytest-cov",
         "doctest": "Run doctests as well.",
+        "verbose": "Run pytest with -vv level verbosity.",
     }
 )
-def test(ctx, checks=False, doctest=False, verbose=True):
+def test(ctx, checks=False, doctest=False, coverage=False, verbose=True):
     """Run all tests."""
     if checks:
         check(ctx)
@@ -149,6 +150,8 @@ def test(ctx, checks=False, doctest=False, verbose=True):
             cmd.append("--doctest-modules")
         if verbose:
             cmd.append("-vv")
+        if coverage:
+            cmd.append("--cov src/compas_mobile_robot_reloc --cov-report xml:cov.xml")
 
         ctx.run(" ".join(cmd))
 

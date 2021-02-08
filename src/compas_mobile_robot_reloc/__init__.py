@@ -1,8 +1,4 @@
-"""
-********************************************************************************
-compas_mobile_robot_reloc
-********************************************************************************
-"""
+"""compas_mobile_robot_reloc"""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -12,6 +8,7 @@ from os import path
 import compas
 import compas.plugins
 
+from .measurement_point import *  # noqa: F401, F403
 from .three_pts_localization import *  # noqa: F401, F403
 
 if not compas.RHINO:
