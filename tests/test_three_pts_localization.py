@@ -45,14 +45,14 @@ def example_pt_wcs():
 def pts_defining_orthogonal_frame():
     # TODO: Debug why nesting fixtures breaks IPY tests
     # def pts_defining_orthogonal_frame(example_pt_rcs):
-    pt = Point(21910.426861, 15663.519267, -2714.911982)
-    return [pt, Point(2000, 1250, 1500), Vector(1000, 2250, 1500)]
+    pt = Point(1000, 1250, 1500)
+    return [pt, Point(2000, 1250, 1500), Point(1000, 2250, 1500)]
 
 
 @fixture
 def orthogonal_frame():
     # def orthogonal_frame(example_pt_rcs):
-    pt = Point(21910.426861, 15663.519267, -2714.911982)
+    pt = Point(1000, 1250, 1500)
     return Frame(pt, Point(1, 0, 0), Vector(0, 1, 0))
 
 
