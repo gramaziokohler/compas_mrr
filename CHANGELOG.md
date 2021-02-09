@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable-file MD024 -->
 
-## Unreleased
+## 2021-02-09 - 1.0.5
 
 ### Added
 
@@ -16,7 +16,7 @@ is less than `v0.19.2` to get around
 import (`compas_mobile_robot_reloc.MeasurementPoint`). Still available from
 `compas_mobile_robot_reloc.utils` for backwards compatibility.
 
-## 20201-02-08 - 1.0.4
+## 2021-02-08 - 1.0.4
 
 ### Changed
 
