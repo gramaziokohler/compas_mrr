@@ -1,0 +1,119 @@
+name: Test, build, publish docs and release
+
+on:
+  push:
+    branches-ignore:
+      - "gh-pages"
+
+jobs:
+  build-and-test:
+    name: Install, test, build package and build docs
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: [3.7, 3.8]
+        compas-version-specifier: [false]
+        include:
+          - os: windows-latest
+            python-version: 3.7
+            compas-version-specifier: ==0.17.2
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install wheel  # https://stackoverflow.com/questions/34819221
+          python -m pip install cython --install-option='--no-cython-compile'
+          if [[ $COMPAS_VERSION_SPECIFIER != 'false' ]] ; then
+            python -m pip install "compas$COMPAS_VERSION_SPECIFIER"
+          fi
+          python -m pip install --no-cache-dir -e .[dev]
+        env:
+          COMPAS_VERSION_SPECIFIER: ${{ matrix.compas-version-specifier }}
+
+      - name: Test import
+        run: python -m compas_mobile_robot_reloc
+
+      - name: Test
+        run: invoke test
+
+      - name: Build docs
+        run: invoke docs
+
+      - name: Build package
+        run: invoke build
+
+  publish:
+    name: Publish docs and package
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main' || startsWith( github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set job metadata
+        id: check-tag
+        shell: bash
+        run: |
+          if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "RELEASE=true" >> $GITHUB_ENV
+          else
+              echo "PUBLISH_DOCS=true" >> $GITHUB_ENV
+          fi
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install
+        run: |
+          pip install --upgrade pip
+          pip install wheel  # https://stackoverflow.com/questions/34819221
+          pip install cython --install-option='--no-cython-compile'
+          python -m pip install --no-cache-dir -e .[dev]
+
+      - name: Build docs
+        if: env.PUBLISH_DOCS
+        run: invoke docs
+
+      - name: Publish docs on branch gh-pages
+        uses: crazy-max/ghaction-github-pages@v2.2.0
+        with:
+          target_branch: gh-pages
+          build_dir: docs
+          jekyll: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build package
+        if: env.RELEASE
+        run: invoke build
+
+      - name: Upload and release package on PyPi
+        uses: pypa/gh-action-pypi-publish@v1.4.2
+        if: env.RELEASE
+        with:
+          user: __token__
+          password: ${{ secrets.pypi_password }}
+
+      - name: Create GitHub release and upload assets
+        if: env.RELEASE
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            dist/*.whl
+            dist/*.tar.gz
