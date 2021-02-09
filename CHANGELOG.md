@@ -2,6 +2,15 @@
 
 <!-- markdownlint-disable-file MD024 -->
 
+## Unreleased
+
+### Added
+
+### Changed
+
+### Removed
+
+
 ## 2021-02-09 - 1.0.5
 
 ### Added
