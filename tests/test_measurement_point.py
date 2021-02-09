@@ -9,9 +9,8 @@ def example_instance():
 
 
 @fixture
-def example_instance_wo_idx(example_instance):
-    example_instance.pt_name = "example_pt_wo_idx"
-    return example_instance
+def example_instance_wo_idx():
+    return MeasurementPoint(5.2, 2.1, 3.4, "example_pt")
 
 
 def test_init(example_instance):

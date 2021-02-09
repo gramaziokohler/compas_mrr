@@ -28,8 +28,15 @@ def rcf_matrix():
 
 
 @fixture
-def rcf_xform(rcf_matrix):
-    return Transformation.from_matrix(rcf_matrix)
+def rcf_xform():
+    # def rcf_xform(rcf_matrix):
+    M = [
+        [1.0, 0.0, 0.0, -100],
+        [0.0, 0.0, 1.0, -100],
+        [0.0, -1.0, 0.0, 100],
+        [0.0, 0.0, 0.0, 1.0],
+    ]
+    return Transformation.from_matrix(M)
 
 
 @fixture

@@ -42,13 +42,18 @@ def example_pt_wcs():
 
 
 @fixture
-def pts_defining_orthogonal_frame(example_pt_rcs):
-    return [example_pt_rcs, Point(2000, 1250, 1500), Vector(1000, 2250, 1500)]
+def pts_defining_orthogonal_frame():
+    # TODO: Debug why nesting fixtures breaks IPY tests
+    # def pts_defining_orthogonal_frame(example_pt_rcs):
+    pt = Point(21910.426861, 15663.519267, -2714.911982)
+    return [pt, Point(2000, 1250, 1500), Vector(1000, 2250, 1500)]
 
 
 @fixture
-def orthogonal_frame(example_pt_rcs):
-    return Frame(example_pt_rcs, Point(1, 0, 0), Vector(0, 1, 0))
+def orthogonal_frame():
+    # def orthogonal_frame(example_pt_rcs):
+    pt = Point(21910.426861, 15663.519267, -2714.911982)
+    return Frame(pt, Point(1, 0, 0), Vector(0, 1, 0))
 
 
 def test__pts_to_frame(pts_defining_orthogonal_frame, orthogonal_frame):
