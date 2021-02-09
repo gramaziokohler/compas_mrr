@@ -4,10 +4,17 @@
 
 ## Unreleased
 
+### Added
+
+* Monkeypatch added for `compas._os.prepare_environment` applied if compas version
+is less than `v0.19.2` to get around
+[a bug affecting `compas.rpc.proxy`](https://github.com/compas-dev/compas/issues/701)
+
 ### Changed
 
 * `MeasurementPoint` moved to its own module and made available as second level
-import (`compas_mobile_robot_reloc.MeasurementPoint`).
+import (`compas_mobile_robot_reloc.MeasurementPoint`). Still available from
+`compas_mobile_robot_reloc.utils` for backwards compatibility.
 
 ## 20201-02-08 - 1.0.4
 

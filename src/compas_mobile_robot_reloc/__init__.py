@@ -3,7 +3,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
 from os import path
+from distutils.version import LooseVersion
 
 import compas
 import compas.plugins
@@ -57,3 +59,55 @@ __version__ = _get_version()
 
 
 __all_plugins__ = ["compas_mobile_robot_reloc.rhino_install"]
+
+# Backport for path related bug with compas.rpc.Proxy
+# See https://github.com/compas-dev/compas/issues/701
+# & https://github.com/compas-dev/compas/pull/720
+
+
+def _fixed_prepare_environment(env=None):
+    """Prepares an environment context to run Python on.
+
+    Copied from https://github.com/compas-dev/compas/blob/v0.19.2/src/compas/_os.py
+
+    If Python is being used from a conda environment, this is roughly equivalent
+    to activating the conda environment by setting up the correct environment
+    variables.
+
+    Parameters
+    ----------
+    env : dict, optional
+        Dictionary of environment variables to modify. If ``None`` is passed, then
+        this will create a copy of the current ``os.environ``.
+
+    Returns
+    -------
+    dict
+        Updated environment variable dictionary.
+    """
+    from compas import WINDOWS
+    from compas._os import PYTHON_DIRECTORY
+    from compas._os import CONDA_EXE
+
+    if env is None:
+        env = os.environ.copy()
+
+    if PYTHON_DIRECTORY:
+        if WINDOWS:
+            lib_bin = os.path.join(PYTHON_DIRECTORY, "Library", "bin")
+        else:
+            lib_bin = os.path.join(PYTHON_DIRECTORY, "bin")
+
+        if os.path.exists(lib_bin) and lib_bin not in env["PATH"]:
+            env["PATH"] = lib_bin + os.pathsep + env["PATH"]
+
+    if CONDA_EXE:
+        env["CONDA_EXE"] = CONDA_EXE
+
+    return env
+
+
+if LooseVersion(compas.__version__) < LooseVersion("0.19.2"):
+    import compas._os
+
+    compas._os.prepare_environment = _fixed_prepare_environment

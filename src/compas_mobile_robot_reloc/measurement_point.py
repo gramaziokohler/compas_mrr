@@ -5,6 +5,7 @@ from __future__ import print_function
 import compas
 import compas.geometry
 
+from compas_mobile_robot_reloc import utils
 from compas_mobile_robot_reloc.utils import TYPE_CHECKING
 from compas_mobile_robot_reloc.utils import cgpoint_to_rgpoint
 
@@ -65,3 +66,8 @@ class MeasurementPoint(compas.geometry.Point):
             _idx = 0
 
         return prefix, _idx
+
+
+# Make MeasurementPoint available from utils for backwards compatibility
+# with compas_mobile_robot_reloc <= v1.0.4
+utils.MeasurementPoint = MeasurementPoint  # type: ignore[attr-defined]
