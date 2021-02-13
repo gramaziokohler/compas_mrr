@@ -42,7 +42,8 @@ def example_pt_wcs():
 
 @fixture
 def orthogonal_frame(rcs_coords):
-    return Frame(example_pt_rcs[0], Point(1, 0, 0), Vector(0, 1, 0))
+    pt = rcs_coords[0]
+    return Frame(pt, Point(1, 0, 0), Vector(0, 1, 0))
 
 
 def test__pts_to_frame(rcs_coords, orthogonal_frame):
