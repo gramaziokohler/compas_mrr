@@ -2,9 +2,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from compas import IPY
-from compas.geometry import Point
 from compas.geometry import Frame
+from compas.geometry import Point
 from compas.geometry import Vector
 from pytest import fixture
 
@@ -42,26 +41,16 @@ def example_pt_wcs():
 
 
 @fixture
-def pts_defining_orthogonal_frame():
-    # TODO: Debug why nesting fixtures breaks IPY tests
-    # def pts_defining_orthogonal_frame(example_pt_rcs):
-    pt = Point(1000, 1250, 1500)
-    return [pt, Point(2000, 1250, 1500), Point(1000, 2250, 1500)]
+def orthogonal_frame(rcs_coords):
+    return Frame(example_pt_rcs[0], Point(1, 0, 0), Vector(0, 1, 0))
 
 
-@fixture
-def orthogonal_frame():
-    # def orthogonal_frame(example_pt_rcs):
-    pt = Point(1000, 1250, 1500)
-    return Frame(pt, Point(1, 0, 0), Vector(0, 1, 0))
+def test__pts_to_frame(rcs_coords, orthogonal_frame):
+    assert _pts_to_frame(rcs_coords) == orthogonal_frame
 
 
-def test__pts_to_frame(pts_defining_orthogonal_frame, orthogonal_frame):
-    assert _pts_to_frame(pts_defining_orthogonal_frame) == orthogonal_frame
-
-
-def test__coerce_frame(pts_defining_orthogonal_frame, orthogonal_frame):
-    assert _coerce_frame(pts_defining_orthogonal_frame) == orthogonal_frame
+def test__coerce_frame(rcs_coords, orthogonal_frame):
+    assert _coerce_frame(rcs_coords) == orthogonal_frame
     assert _coerce_frame(orthogonal_frame) == orthogonal_frame
 
 
@@ -70,11 +59,11 @@ def test_three_pts_localization(rcs_coords, wcs_coords, example_pt_rcs, example_
 
     transformed_pt = robot_base_wcs.to_local_coordinates(example_pt_rcs)
 
-    if IPY:
-        rounded_transformed_pt = [round(c, 2) for c in list(transformed_pt)]
-        rounded_example_pt = [round(c, 2) for c in list(example_pt_wcs)]
-        assert rounded_transformed_pt == rounded_example_pt
-    else:
+    try:
         from pytest import approx
 
         assert list(transformed_pt) == approx(list(example_pt_wcs))
+    except ImportError:
+        rounded_transformed_pt = [round(c, 2) for c in list(transformed_pt)]
+        rounded_example_pt = [round(c, 2) for c in list(example_pt_wcs)]
+        assert rounded_transformed_pt == rounded_example_pt
