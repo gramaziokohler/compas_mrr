@@ -129,7 +129,8 @@ jobs:
         run: invoke docs
 
       - name: Publish docs on branch gh-pages
-        uses: crazy-max/ghaction-github-pages@v2.2.0
+        # version 2.2.0
+        uses: crazy-max/ghaction-github-pages@1510b11c0c2f843eafb8ff41b3da8c467c8d4a9f
         with:
           target_branch: gh-pages
           build_dir: docs
@@ -150,7 +151,8 @@ jobs:
 
       - name: Create GitHub release and upload assets
         if: env.RELEASE
-        uses: softprops/action-gh-release@v1
+        # version 1.0.5
+        uses: softprops/action-gh-release@b7e450da2a4b4cb4bfbae528f788167786cfcedf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
