@@ -150,7 +150,7 @@ jobs:
 
       - name: Create GitHub release and upload assets
         if: env.RELEASE
-        uses: softprops/action-gh-release@91409e712cf565ce9eff10c87a8d1b11b81757ae  # version 0.1.5
+        uses: softprops/action-gh-release@91409e712cf565ce9eff10c87a8d1b11b81757ae  # tag v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
