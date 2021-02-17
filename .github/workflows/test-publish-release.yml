@@ -2,6 +2,8 @@ name: Test, build, publish docs and release
 
 on:
   push:
+    tags:
+      - v*
     branches-ignore:
       - "gh-pages"
 
