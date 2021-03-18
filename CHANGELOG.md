@@ -2,14 +2,10 @@
 
 <!-- markdownlint-disable-file MD024 -->
 
-## Unreleased
-
-### Added
+## 2021-03-18 - 1.0.6
 
 ### Changed
-
-### Removed
-
+* Bumped max compas version to `1.2`.
 
 ## 2021-02-09 - 1.0.5
 
