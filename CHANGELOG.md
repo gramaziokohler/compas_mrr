@@ -7,6 +7,7 @@
 ### Added
 
 ### Changed
+* Bumped max compas version to `1.2`.
 
 ### Removed
 
