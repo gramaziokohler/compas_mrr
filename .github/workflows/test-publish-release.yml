@@ -80,8 +80,9 @@ jobs:
         run: |
           choco install ironpython --version=2.7.8.1
           ipy -X:Frames -m ensurepip
-          ipy -X:Frames -m pip install ironpython-pytest>=0.4.0
           ipy -X:Frames -m pip install compas --no-deps
+          curl -o ironpython-pytest.tar.gz -LJO https://pypi.debian.net/ironpython-pytest/latest
+          ipy -X:Frames -m pip install --no-deps ironpython-pytest.tar.gz
 
       - name: Test import
         run: |
