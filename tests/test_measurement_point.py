@@ -21,7 +21,7 @@ def test_init(example_instance):
 
 def test___repr__(example_instance):
     assert (
-        str(example_instance) == "Point ID: example_pt1, Location: 1000.0, 0.0, 1000.0"
+        repr(example_instance) == "Point ID: example_pt1, Location: 1000.0, 0.0, 1000.0"
     )
 
 
