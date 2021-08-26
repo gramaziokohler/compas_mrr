@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable-file MD024 -->
 
-$$ 2021-08-25 - 1.0.7
+## 2021-08-25 - 1.0.7
 
 ### Changed
 * Bumped max compas version to `<1.8`.
