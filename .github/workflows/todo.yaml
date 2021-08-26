@@ -12,6 +12,6 @@ jobs:
       - uses: "actions/checkout@v2.3.4"
       
       - name: "TODO to Issue"
-        uses: "alstr/todo-to-issue-action@9e47839bcaed1fc37f2c81d9258e08aa8423ecdb"
+        uses: "alstr/todo-to-issue-action@1169721b229b543f62442d3e8a9ab5007f6e5d19"
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
