@@ -122,7 +122,7 @@ jobs:
         run: invoke docs
 
       - name: Publish docs on branch gh-pages
-        uses: crazy-max/ghaction-github-pages@db4476a01402e1a7ce05f41832040eef16d14925
+        uses: crazy-max/ghaction-github-pages@a117e4aa1fb4854d021546d2abdfac95be568a3a
         with:
           target_branch: gh-pages
           build_dir: docs
