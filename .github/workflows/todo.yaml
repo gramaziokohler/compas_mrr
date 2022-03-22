@@ -9,7 +9,7 @@ jobs:
   todo:
     runs-on: "ubuntu-latest"
     steps:
-      - uses: "actions/checkout@v2.4.0"
+      - uses: "actions/checkout@v3"
       
       - name: "TODO to Issue"
         uses: "alstr/todo-to-issue-action@46584f64f7ddc01de0861d280fa550d5b3a29afc"
