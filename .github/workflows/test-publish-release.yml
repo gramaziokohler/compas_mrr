@@ -174,7 +174,7 @@ jobs:
           password: ${{ secrets.pypi_password }}
 
       - name: Create GitHub release and upload assets
-        uses: softprops/action-gh-release@fb0163a75bee697a9cfec2c931801de7c7f10042
+        uses: softprops/action-gh-release@1e07f4398721186383de40550babbdf2b84acfc5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
