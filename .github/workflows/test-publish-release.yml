@@ -167,7 +167,7 @@ jobs:
         run: invoke build
 
       - name: Upload and release package on PyPi
-        uses: pypa/gh-action-pypi-publish@v1.5.1
+        uses: pypa/gh-action-pypi-publish@v1.6.1
         if: steps.changelog_reader.outputs.status == 'released'
         with:
           user: __token__
