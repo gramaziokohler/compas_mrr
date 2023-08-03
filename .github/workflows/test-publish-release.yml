@@ -35,7 +35,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install wheel  # https://stackoverflow.com/questions/34819221
-          python -m pip install cython --install-option='--no-cython-compile'
           if [[ $COMPAS_VERSION_SPECIFIER != 'false' ]] ; then
             python -m pip install "compas$COMPAS_VERSION_SPECIFIER"
           fi
@@ -70,7 +69,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install wheel  # https://stackoverflow.com/questions/34819221
-          pip install cython --install-option='--no-cython-compile'
 
       - name: Install package for CPython (RPC tests)
         run: |
@@ -115,7 +113,6 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install wheel  # https://stackoverflow.com/questions/34819221
-          pip install cython --install-option='--no-cython-compile'
           python -m pip install --no-cache-dir -e .[dev]
 
       - name: Build docs
@@ -160,7 +157,6 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install wheel  # https://stackoverflow.com/questions/34819221
-          pip install cython --install-option='--no-cython-compile'
           python -m pip install --no-cache-dir -e .[dev]
 
       - name: Build package
