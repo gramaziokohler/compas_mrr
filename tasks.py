@@ -124,9 +124,6 @@ def docs(ctx, doctest=False, rebuild=True, check_links=False):
 def check(ctx):
     """Check the consistency of documentation, coding style and a few other things."""
     with chdir(BASE_FOLDER):
-        log.write("Pep517 check")
-        ctx.run("python -m pep517.check .")
-
         log.write("Running all pre-commit hooks on whole repository.")
         ctx.run("pre-commit run --all-files")
 
@@ -178,7 +175,7 @@ def prepare_changelog(ctx):
 @task
 def build(ctx):
     """Build project."""
-    ctx.run("python -m pep517.build .")
+    ctx.run("python -m build .")
 
 
 @task
