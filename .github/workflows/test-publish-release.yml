@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ['3.7', '3.8', '3.9', '3.10']
+        python-version: ['3.8', '3.9', '3.10']
 
     steps:
       - name: Checkout repo
@@ -74,7 +74,7 @@ jobs:
         run: |
           choco install ironpython --version=2.7.8.1
           ipy -X:Frames -m ensurepip
-          curl -o compas.tar.gz -LJO https://pypi.debian.net/compas/latest
+          curl -o compas.tar.gz -LJO https://files.pythonhosted.org/packages/db/cb/c58593cef8657a7f6f4007afe44bc0f93c99ab8c6242c51062c70e4618d9/COMPAS-1.17.10.tar.gz
           ipy -X:Frames -m pip install --no-deps compas.tar.gz
           curl -o ironpython-pytest.tar.gz -LJO https://pypi.debian.net/ironpython-pytest/latest
           ipy -X:Frames -m pip install --no-deps ironpython-pytest.tar.gz
