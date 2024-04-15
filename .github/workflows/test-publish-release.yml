@@ -118,7 +118,7 @@ jobs:
             --no-toc \
             --force \
             --no-headings \
-            -o docs/reference src/compas_mobile_robot_reloc
+            -o docs/reference src/compas_mrr
           sphinx-build -b html docs dist/docs
           sphinx-build -b linkcheck docs dist/docs
 
