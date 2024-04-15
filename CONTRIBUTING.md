@@ -9,19 +9,14 @@ In short, this is how that works.
 
 ### Setup
 
-1. Fork [the repository](https://github.com/gramaziokohler/compas_mrr_robot_reloc) and clone the fork.
+1. Fork [the repository](https://github.com/gramaziokohler/compas_mrr) and clone the fork.
 
 2. Create a virtual environment using your tool of choice (e.g. `virtualenv`, `conda`, etc).
 
     * Using [Anaconda](https://www.anaconda.com/)
 
     ```bash
-    # setup conda-forge
-    conda config --add channels conda-forge
-    conda config --set channel_priority strict
-
-    # use conda to install compas if possible
-    conda create -n compas_mrr-dev python=3.8 compas==0.19.3
+    conda env update -f environment.yml
     conda activate compas_mrr-dev
     pip install -e .[dev]
     ```
@@ -29,7 +24,7 @@ In short, this is how that works.
     * Using [virtualenv](https://github.com/pypa/virtualenv)
 
     ```bash
-    virtualenv --python=python3.8 {{path/to/venv}}
+    virtualenv --python=python3.10 {{path/to/venv}}
     source {{path/to/venv}}/bin/activate
     pip install -e .[dev]
     ```
@@ -45,33 +40,23 @@ In short, this is how that works.
 1. Make sure all tests pass on the unmodified code:
 
    ```bash
-   invoke test
+   pytest
    ```
 
-2. Start making your changes to the **master** branch (or branch off of it) on your fork.
-3. Make sure all tests still pass:
+1. Start making your changes to the **main** branch (or branch off of it) on your fork.
+1. Make sure all tests still pass:
 
    ```bash
-   invoke test
+   pytest
    ```
 
-4. Add yourself to the *Contributors* section of `AUTHORS.md`.
-5. Document the changes in the `CHANGELOG.md`
-6. Commit your changes and push your branch to GitHub.
-7. Create a [pull request](https://help.github.com/articles/about-pull-requests/) through the GitHub website.
-
-During development, use [pyinvoke](http://docs.pyinvoke.org/) tasks on the
-command line to ease recurring operations:
-
-* `invoke clean`: Clean all generated artifacts.
-* `invoke check`: Run various code and documentation style checks.
-* `invoke docs`: Generate documentation.
-* `invoke test`: Run all tests and checks in one swift command.
-* `invoke`: Show available tasks.
+1. Document the changes in the `CHANGELOG.md`
+1. Commit your changes and push your branch to GitHub.
+1. Create a [pull request](https://help.github.com/articles/about-pull-requests/) through the GitHub website.
 
 ## Bug reports
 
-When [reporting a bug](https://github.com/gramaziokohler/rapid_clay_formations_fab/issues) please include:
+When [reporting a bug](https://github.com/gramaziokohler/compas_mrr/issues) please include:
 
 * Operating system name and version.
 * Any details about your local setup that might be helpful in troubleshooting.
@@ -79,7 +64,7 @@ When [reporting a bug](https://github.com/gramaziokohler/rapid_clay_formations_f
 
 ## Feature requests
 
-When [proposing a new feature](https://github.com/gramaziokohler/rapid_clay_formations_fab/issues) please include:
+When [proposing a new feature](https://github.com/gramaziokohler/compas_mrr/issues) please include:
 
 * Explain in detail how it would work.
 * Keep the scope as narrow as possible, to make it easier to implement.

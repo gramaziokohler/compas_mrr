@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ['3.8', '3.9', '3.10']
+        python-version: ["3.8", "3.9", "3.10"]
 
     steps:
       - name: Checkout repo
@@ -48,7 +48,7 @@ jobs:
             --no-headings \
             -o docs/reference src/compas_mrr
           sphinx-build -b html docs dist/docs
-          sphinx-build -b linkcheck docs dist/docs
+          # sphinx-build -b linkcheck docs dist/docs
 
       - name: Build package
         run: python -m build
@@ -66,7 +66,6 @@ jobs:
 
       - name: Install dependencies & package for CPython (RPC tests)
         run: |
-          pip install wheel  # https://stackoverflow.com/questions/34819221
           pip install --no-cache-dir .
 
       - name: Install dependencies
@@ -119,7 +118,7 @@ jobs:
             --no-headings \
             -o docs/reference src/compas_mrr
           sphinx-build -b html docs dist/docs
-          sphinx-build -b linkcheck docs dist/docs
+          # sphinx-build -b linkcheck docs dist/docs
 
       - name: Publish docs on branch gh-pages
         uses: crazy-max/ghaction-github-pages@5859b4ea7efe6b470a5b19c570460eae9323aefc

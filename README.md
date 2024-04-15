@@ -7,7 +7,7 @@ Robot localization using external measuring device (total station).
 [![Conda](https://img.shields.io/conda/v/conda-forge/compas_mrr)](https://anaconda.org/conda-forge/compas_mrr)
 ![License](https://img.shields.io/github/license/gramaziokohler/compas_mrr)
 
-![Image of total station and robot setup in Brunnen](docs/images/total_station_brunnen.png)
+![Image of total station and robot setup in Brunnen](/docs/images/total_station_brunnen.png)
 Photo from video shot by
 [MASDFAB 1920 team](https://www.masdfab.com/2019-20-t3-mas-dfab).
 
