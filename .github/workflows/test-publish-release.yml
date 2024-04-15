@@ -32,26 +32,14 @@ jobs:
         run: |
           python -m pip install --no-cache-dir -e .[dev]
 
+      - name: Build package
+        run: python -m build
+
       - name: Test import
         run: python -m compas_mrr
 
       - name: Test
         run: pytest
-
-      - name: Build docs
-        run: |
-          sphinx-apidoc \
-            --separate \
-            --module-first \
-            --no-toc \
-            --force \
-            --no-headings \
-            -o docs/reference src/compas_mrr
-          sphinx-build -b html docs dist/docs
-          # sphinx-build -b linkcheck docs dist/docs
-
-      - name: Build package
-        run: python -m build
 
   ironpython-test:
     name: windows-ironpython
@@ -91,7 +79,6 @@ jobs:
 
   publish-docs:
     name: Publish docs
-    needs: build-and-test
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
