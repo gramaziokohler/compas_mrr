@@ -6,12 +6,12 @@ from __future__ import print_function
 
 import sphinx_compas_theme
 
-from compas_mobile_robot_reloc import __version__
+from compas_mrr import __version__
 
-pkg_name = "compas_mobile_robot_reloc"
+pkg_name = "compas_mrr"
 project = "COMPAS Mobile Robot Relocalization"
 copyright = "Gramazio Kohler Research"
-author = "Anton T Johansson"
+author = "Anton Tetov"
 version = release = __version__
 
 source_suffix = {".rst": "restructuredtext", ".md": "markdown"}

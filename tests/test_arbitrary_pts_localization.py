@@ -26,7 +26,6 @@ def wcs_pts():
 
 @fixture
 def rcs_pts():
-
     coords = [
         [-2306.777, -271.836, -108.456],
         [-2306.726, -1153.883, 53.651],
@@ -57,7 +56,7 @@ def test_arbitrary_pts_localization(wcs_pts, rcs_pts, approx_result):
     import numpy as np
     from pytest import approx
 
-    from compas_mobile_robot_reloc import arbitrary_pts_localization
+    from compas_mrr import arbitrary_pts_localization
 
     result = arbitrary_pts_localization(rcs_pts, wcs_pts)
 
@@ -65,9 +64,7 @@ def test_arbitrary_pts_localization(wcs_pts, rcs_pts, approx_result):
 
 
 def test_proxy(wcs_pts, rcs_pts, approx_result):
-    with Proxy(
-        "compas_mobile_robot_reloc.arbitrary_pts_localization", python="python"
-    ) as proxy:
+    with Proxy("compas_mrr.arbitrary_pts_localization", python="python") as proxy:
         result = proxy.arbitrary_pts_localization(rcs_pts, wcs_pts)
 
     try:

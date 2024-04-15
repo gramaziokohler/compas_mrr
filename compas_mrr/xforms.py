@@ -1,11 +1,12 @@
 """Transformations"""
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 import compas.geometry as cg
 
-from compas_mobile_robot_reloc.utils import TYPE_CHECKING
+from compas_mrr.utils import TYPE_CHECKING
 
 try:
     from collections.abc import Sequence
@@ -13,16 +14,16 @@ except ImportError:
     from collections import Sequence
 
 if TYPE_CHECKING:
-    from typing import Any
-    from typing import List
+    from typing import Any  # noqa: F401
+    from typing import List  # noqa: F401
 
 
 def _coerce_cg_xform(xform):  # type: (Any) -> cg.Transformation
     try:
-        from Rhino.Geometry import Transform
+        from Rhino.Geometry import Transform  # type: ignore
 
         if isinstance(xform, Transform):
-            from compas_mobile_robot_reloc.utils import rgtransform_to_matrix
+            from compas_mrr.utils import rgtransform_to_matrix
 
             M = rgtransform_to_matrix(xform)
             return cg.Transformation.from_matrix(M)

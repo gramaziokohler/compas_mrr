@@ -7,9 +7,9 @@ from compas.geometry import Point
 from compas.geometry import Vector
 from pytest import fixture
 
-from compas_mobile_robot_reloc import three_pts_localization
-from compas_mobile_robot_reloc.three_pts_localization import _coerce_frame
-from compas_mobile_robot_reloc.three_pts_localization import _pts_to_frame
+from compas_mrr import three_pts_localization
+from compas_mrr.three_pts_localization import _coerce_frame
+from compas_mrr.three_pts_localization import _pts_to_frame
 
 
 @fixture

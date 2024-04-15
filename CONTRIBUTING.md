@@ -9,7 +9,7 @@ In short, this is how that works.
 
 ### Setup
 
-1. Fork [the repository](https://github.com/gramaziokohler/compas_mobile_robot_reloc) and clone the fork.
+1. Fork [the repository](https://github.com/gramaziokohler/compas_mrr_robot_reloc) and clone the fork.
 
 2. Create a virtual environment using your tool of choice (e.g. `virtualenv`, `conda`, etc).
 
@@ -21,8 +21,8 @@ In short, this is how that works.
     conda config --set channel_priority strict
 
     # use conda to install compas if possible
-    conda create -n compas_mobile_robot_reloc-dev python=3.8 compas==0.19.3
-    conda activate compas_mobile_robot_reloc-dev
+    conda create -n compas_mrr-dev python=3.8 compas==0.19.3
+    conda activate compas_mrr-dev
     pip install -e .[dev]
     ```
 

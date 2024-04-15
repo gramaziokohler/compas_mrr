@@ -1,4 +1,5 @@
 """Utilities"""
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -7,7 +8,7 @@ import compas
 import compas.geometry
 
 try:
-    import Rhino.Geometry
+    import Rhino.Geometry  # type: ignore
 except ImportError:
     pass
 
@@ -33,7 +34,7 @@ def _is_type_checking():  # type: () -> bool
 TYPE_CHECKING = _is_type_checking()  # type: bool
 
 if TYPE_CHECKING:
-    from typing import List
+    from typing import List  # noqa: F401
 
 
 def rgpoint_to_cgpoint(pt):

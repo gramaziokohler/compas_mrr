@@ -2,17 +2,17 @@
 
 Robot localization using external measuring device (total station).
 
-![Build and test](https://github.com/gramaziokohler/compas_mobile_robot_reloc/workflows/workflow/badge.svg)
-[![PyPI Package latest release](https://img.shields.io/pypi/v/compas_mobile_robot_reloc.svg)](https://pypi.org/project/compas-mobile-robot-reloc)
-[![Conda](https://img.shields.io/conda/v/conda-forge/compas_mobile_robot_reloc)](https://anaconda.org/conda-forge/compas_mobile_robot_reloc)
-![License](https://img.shields.io/github/license/gramaziokohler/compas_mobile_robot_reloc)
+![Build and test](https://github.com/gramaziokohler/compas_mrr/workflows/workflow/badge.svg)
+[![PyPI Package latest release](https://img.shields.io/pypi/v/compas_mrr.svg)](https://pypi.org/project/compas-mrr)
+[![Conda](https://img.shields.io/conda/v/conda-forge/compas_mrr)](https://anaconda.org/conda-forge/compas_mrr)
+![License](https://img.shields.io/github/license/gramaziokohler/compas_mrr)
 
 ![Image of total station and robot setup in Brunnen](docs/images/total_station_brunnen.png)
 Photo from video shot by
 [MASDFAB 1920 team](https://www.masdfab.com/2019-20-t3-mas-dfab).
 
-* [Documentation](https://gramaziokohler.github.io/compas_mobile_robot_reloc)
-* [Issue tracker](https://github.com/gramaziokohler/compas_mobile_robot_reloc)
+* [Documentation](https://gramaziokohler.github.io/compas_mrr)
+* [Issue tracker](https://github.com/gramaziokohler/compas_mrr)
 
 ## Sources
 

@@ -1,21 +1,47 @@
 [build-system]
-requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.4"]
+requires = ["setuptools>=64", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
+[project]
+name = "compas_mrr"
+authors = [{name = "Anton Tetov", email = "anton@tetov.se"}]
+description = "COMPAS Mobile Robot Reloc: Robot localization using external measuring device (total station)."
+dynamic = ["version"]
+requires-python = ">=3.8"
+keywords = ["architecture", "engineering", "fabrication", "construction"]
+license = {text = "MIT"}
+readme = "README.md"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Topic :: Scientific/Engineering",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: Unix",
+  "Operating System :: POSIX",
+  "Operating System :: Microsoft :: Windows",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 2",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: IronPython",
+]
+dependencies = ["compas<2"]
+urls = {repository = "https://github.com/gramaziokohler/compas_mrr", documentation = "https://gramaziokohler.github.io/compas_mrr"}
+
+[project.optional-dependencies]
+dev = [
+  "m2r2",
+  "pre-commit",
+  "pytest",
+  "pytest-cov",
+  "ruff",
+  "sphinx",
+  "sphinx_compas_theme<1",
+]
+
 [tool.setuptools_scm]
-write_to = "src/compas_mobile_robot_reloc/_version.py"
 
-[tool.autopep8]
-max-line-length = 88
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers --doctest-modules --doctest-glob=*.rst --tb=short"
 
-[tool.isort]
-profile = "black"
-force_single_line = true
-known_first_party = "compas_mobile_robot_reloc"
-known_third_party = "compas,Rhino"
-default_section = "THIRDPARTY"
-add_imports = "__future__.absolute_import,__future__.division,__future__.print_function"
-skip = "_version.py"
-
-[tool.black]
-target-version = ['py27']
+doctest_optionflags= "NORMALIZE_WHITESPACE IGNORE_EXCEPTION_DETAIL ALLOW_UNICODE ALLOW_BYTES"

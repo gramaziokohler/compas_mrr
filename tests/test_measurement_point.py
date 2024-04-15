@@ -1,5 +1,5 @@
 from pytest import fixture
-from compas_mobile_robot_reloc import MeasurementPoint
+from compas_mrr import MeasurementPoint
 from compas.geometry import Point
 
 

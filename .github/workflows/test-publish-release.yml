@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: [3.7, 3.8, 3.9]
+        python-version: [3.7, 3.8, 3.9, 3.10]
 
     steps:
       - name: Checkout repo
@@ -30,20 +30,29 @@ jobs:
 
       - name: Install
         run: |
-          python -m pip install wheel  # https://stackoverflow.com/questions/34819221
           python -m pip install --no-cache-dir -e .[dev]
 
       - name: Test import
-        run: python -m compas_mobile_robot_reloc
+        run: python -m compas_mrr
 
       - name: Test
-        run: invoke test
+        run: pytest
 
       - name: Build docs
-        run: invoke docs
+        run: |
+          sphinx-build -b doctest docs build/docs
+          sphinx-apidoc \
+            --separate \
+            --module-first \
+            --no-toc \
+            --force \
+            --no-headings \
+            -o docs/reference src/compas_mobile_robot_reloc
+          sphinx-build -b html docs dist/docs
+          sphinx-build -b linkcheck docs dist/docs
 
       - name: Build package
-        run: invoke build
+        run: python -m build
 
   ironpython-test:
     name: windows-ironpython
@@ -72,7 +81,7 @@ jobs:
 
       - name: Test import
         run: |
-          ipy -m compas_mobile_robot_reloc
+          ipy -m compas_mrr
         env:
           IRONPYTHONPATH: ./src
 
@@ -98,17 +107,26 @@ jobs:
 
       - name: Install
         run: |
-          pip install wheel  # https://stackoverflow.com/questions/34819221
           pip install --no-cache-dir -e .[dev]
 
       - name: Build docs
-        run: invoke docs
+        run: |
+          sphinx-build -b doctest docs build/docs
+          sphinx-apidoc \
+            --separate \
+            --module-first \
+            --no-toc \
+            --force \
+            --no-headings \
+            -o docs/reference src/compas_mobile_robot_reloc
+          sphinx-build -b html docs dist/docs
+          sphinx-build -b linkcheck docs dist/docs
 
       - name: Publish docs on branch gh-pages
         uses: crazy-max/ghaction-github-pages@5859b4ea7efe6b470a5b19c570460eae9323aefc
         with:
           target_branch: gh-pages
-          build_dir: docs
+          build_dir: dist/docs
           jekyll: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -141,12 +159,10 @@ jobs:
           python-version: 3.9
 
       - name: Install
-        run: |
-          pip install wheel  # https://stackoverflow.com/questions/34819221
-          python -m pip install --no-cache-dir -e .[dev]
+        run: python -m pip install --no-cache-dir -e .[dev]
 
       - name: Build package
-        run: invoke build
+        run: python -m build .
 
       - name: Upload and release package on PyPi
         uses: pypa/gh-action-pypi-publish@v1.8.11

@@ -1,4 +1,5 @@
 """Three points method for robot relocalization"""
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -6,13 +7,13 @@ from __future__ import print_function
 from compas.geometry import Frame
 from compas.geometry import Transformation
 
-from compas_mobile_robot_reloc.utils import TYPE_CHECKING
+from compas_mrr.utils import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import List
-    from typing import Union
+    from typing import List  # noqa: F401
+    from typing import Union  # noqa: F401
 
-    from compas.geometry import Point
+    from compas.geometry import Point  # noqa: F401
 
 
 def _pts_to_frame(pts):  # type: (Point) -> Frame
@@ -26,9 +27,7 @@ def _coerce_frame(frame_or_pts):  # type: (Union[List[Point], Frame]) -> Frame
     return _pts_to_frame(frame_or_pts)
 
 
-def three_pts_localization(
-    rcs_coords, wcs_coords
-):  # type: (List[Point], List[Point]) -> Frame
+def three_pts_localization(rcs_coords, wcs_coords):  # type: (List[Point], List[Point]) -> Frame
     """Get the robot base frame in WCS using three points method.
 
     Parameters

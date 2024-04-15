@@ -14,7 +14,7 @@ Install
 
        conda config --add channels conda-forge
        conda config --set channel_priority strict
-       conda create -n env_name python=3.8 compas_mobile_robot_reloc
+       conda create -n env_name python=3.8 compas_mrr
        conda activate env_name
 
     -  Using `virtualenv <https://github.com/pypa/virtualenv>`__
@@ -23,7 +23,7 @@ Install
 
        virtualenv --python=python3.8 {{path/to/venv}}
        source {{path/to/venv}}/bin/activate
-       pip install compas_mobile_robot_reloc
+       pip install compas_mrr
 
 #.  Make package accessible in Rhino and Grasshopper
 
@@ -39,6 +39,6 @@ To update the repository run:
 .. code:: bash
 
    # conda
-   conda update compas_mobile_robot_reloc
+   conda update compas_mrr
    # pip
-   pip install -U compas_mobile_robot_reloc
+   pip install -U compas_mrr

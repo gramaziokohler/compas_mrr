@@ -7,9 +7,9 @@ from compas.geometry import Transformation
 from pytest import fixture
 from pytest import raises
 
-from compas_mobile_robot_reloc.xforms import _coerce_cg_xform
-from compas_mobile_robot_reloc.xforms import worldxy_to_robot_base_xform
-from compas_mobile_robot_reloc.xforms import xform_to_xyz_quaternion
+from compas_mrr.xforms import _coerce_cg_xform
+from compas_mrr.xforms import worldxy_to_robot_base_xform
+from compas_mrr.xforms import xform_to_xyz_quaternion
 
 
 @fixture

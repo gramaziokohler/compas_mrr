@@ -3,6 +3,7 @@
 Arbitrary points method for robot relocalization.
 *******************************************************************************
 """
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -14,7 +15,7 @@ from functools import reduce
 import numpy as np
 from scipy.optimize import minimize
 
-from compas_mobile_robot_reloc.utils import TYPE_CHECKING
+from compas_mrr.utils import TYPE_CHECKING
 
 try:
     from pathlib import Path
@@ -25,9 +26,9 @@ except ImportError:
         raise
 
 if TYPE_CHECKING:
-    from typing import List
+    from typing import List  # noqa: F401
 
-    from scipy.optimize import OptimizeResult
+    from scipy.optimize import OptimizeResult  # noqa: F401
 
 
 def _objective_function(

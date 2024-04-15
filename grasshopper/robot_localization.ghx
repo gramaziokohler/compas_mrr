@@ -1265,7 +1265,7 @@ import os
 
 import rhinoscriptsyntax as rs
 
-from compas_mobile_robot_reloc import MeasurementPoint
+from compas_mrr import MeasurementPoint
 
 if len(prefixes) &lt; 1:
     select_all = True
@@ -1770,7 +1770,7 @@ ids = [pt.pt_name for pt in measured_pts]</item>
                             <chunk name="Item" index="0">
                               <items count="2">
                                 <item name="null_string" type_name="gh_bool" type_code="1">false</item>
-                                <item name="string" type_name="gh_string" type_code="10">C:\Users\a\repos\compas_mobile_robot_reloc\grasshopper\wcs_frames.csv</item>
+                                <item name="string" type_name="gh_string" type_code="10">C:\Users\tetov\repos\compas_mrr\grasshopper\wcs_frames.csv</item>
                               </items>
                             </chunk>
                           </chunks>
@@ -2289,7 +2289,7 @@ from compas_rrc import SetMaxSpeed
 from compas_rrc import SetTool
 from compas_rrc import SetWorkObject
 
-from compas_mobile_robot_reloc.utils import cgframe_to_rgplane
+from compas_mrr.utils import cgframe_to_rgplane
 
 TIMEOUT = 5 # controller communicaton timeout
 
@@ -2745,10 +2745,10 @@ if localization_origin_frame:
                   <items count="12">
                     <item name="CodeInput" type_name="gh_string" type_code="10">from compas.geometry import Transformation, Frame
 
-from compas_mobile_robot_reloc import three_pts_localization
-from compas_mobile_robot_reloc.xforms import worldxy_to_robot_base_xform
-from compas_mobile_robot_reloc.utils import cgtransformation_to_rgtransform
-from compas_mobile_robot_reloc.utils import rgpoint_to_cgpoint
+from compas_mrr import three_pts_localization
+from compas_mrr.xforms import worldxy_to_robot_base_xform
+from compas_mrr.utils import cgtransformation_to_rgtransform
+from compas_mrr.utils import rgpoint_to_cgpoint
 
 if len(rcs_coords) == 0 or len(wcs_coords) == 0:
     raise Exception("No points supplied.")
@@ -3652,7 +3652,7 @@ from __future__ import print_function
 from compas.geometry import Frame
 from compas.geometry import Translation
 
-from compas_mobile_robot_reloc.utils import cgframe_to_rgplane
+from compas_mrr.utils import cgframe_to_rgplane
 
 if localization_origin_frame is None:
     raise Exception("No origin supplied.")
@@ -4053,10 +4053,10 @@ else:
 from compas.geometry import Frame
 from compas.rpc import Proxy
 
-from compas_mobile_robot_reloc.utils import cgtransformation_to_rgtransform
-from compas_mobile_robot_reloc.utils import matrix_to_rgtransform
-from compas_mobile_robot_reloc.utils import rgpoint_to_cgpoint
-from compas_mobile_robot_reloc.xforms import worldxy_to_robot_base_xform
+from compas_mrr.utils import cgtransformation_to_rgtransform
+from compas_mrr.utils import matrix_to_rgtransform
+from compas_mrr.utils import rgpoint_to_cgpoint
+from compas_mrr.xforms import worldxy_to_robot_base_xform
 
 kwargs = {}
 
@@ -4075,7 +4075,7 @@ rcs_coords = [rgpoint_to_cgpoint(pt) for pt in rcs_coords]
 wcs_coords = [rgpoint_to_cgpoint(pt) for pt in wcs_coords]
 
 if run and len(rcs_coords) &gt; 0 and len(wcs_coords) &gt; 0:
-    with Proxy("compas_mobile_robot_reloc", max_conn_attempts=5) as proxy:
+    with Proxy("compas_mrr", max_conn_attempts=5) as proxy:
         try:
             result = proxy.arbitrary_pts_localization(
                 rcs_coords, wcs_coords, **kwargs
@@ -4431,7 +4431,7 @@ if sticky["apl_result"] is not None:
 import Rhino.Geometry as rg
 from compas.utilities import DataDecoder
 
-from compas_mobile_robot_reloc.utils import cgframe_to_rgplane
+from compas_mrr.utils import cgframe_to_rgplane
 
 DataDecoder()
 
@@ -4615,7 +4615,7 @@ rcs_planes = [cgframe_to_rgplane(f) for f in frames]</item>
                             <chunk name="Item" index="0">
                               <items count="2">
                                 <item name="null_string" type_name="gh_bool" type_code="1">false</item>
-                                <item name="string" type_name="gh_string" type_code="10">C:\Users\a\repos\compas_mobile_robot_reloc\grasshopper\rcs_frames.json</item>
+                                <item name="string" type_name="gh_string" type_code="10">C:\Users\tetov\repos\compas_mrr\grasshopper\rcs_frames.json</item>
                               </items>
                             </chunk>
                           </chunks>

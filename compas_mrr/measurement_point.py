@@ -5,13 +5,13 @@ from __future__ import print_function
 import compas
 import compas.geometry
 
-from compas_mobile_robot_reloc import utils
-from compas_mobile_robot_reloc.utils import TYPE_CHECKING
-from compas_mobile_robot_reloc.utils import cgpoint_to_rgpoint
+from compas_mrr import utils
+from compas_mrr.utils import TYPE_CHECKING
+from compas_mrr.utils import cgpoint_to_rgpoint
 
 if TYPE_CHECKING:
-    from typing import Tuple
-    from typing import Union
+    from typing import Tuple  # noqa: F401
+    from typing import Union  # noqa: F401
 
 
 class MeasurementPoint(compas.geometry.Point):
@@ -69,5 +69,5 @@ class MeasurementPoint(compas.geometry.Point):
 
 
 # Make MeasurementPoint available from utils for backwards compatibility
-# with compas_mobile_robot_reloc <= v1.0.4
+# with compas_mrr <= v1.0.4
 utils.MeasurementPoint = MeasurementPoint  # type: ignore[attr-defined]
