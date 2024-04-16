@@ -1,0 +1,17 @@
+name: compas_mrr-dev
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - compas=1.*
+  - python=3.10.*
+  - cryptography
+  - m2r2
+  - pre-commit
+  - pytest
+  - pytest-cov
+  - ruff
+  - sphinx>=3.4,<=7.1.2
+  - pip
+  - pip:
+      - sphinx-compas-theme<1
