@@ -1,0 +1,4 @@
+.. automodule:: compas_mrr.arbitrary_pts_localization
+   :members:
+   :undoc-members:
+   :show-inheritance:

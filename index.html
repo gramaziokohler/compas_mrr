@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <title>compas_mrr - COMPAS Mobile Robot Relocalization</title>
+  
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <meta name="author" content="" />
+  <meta name="description" content="" />
+
+  <link rel="shortcut icon" href="_static/images/compas.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/mono-blue.min.css">
+  <link rel="stylesheet" type="text/css" href="_static/css/compas.css" />
+  <link rel="stylesheet" type="text/css" href="_static/css/compas-reference.css" />
+
+  
+  <link rel="next" title="Installation" href="installation.html" />
+  
+
+  
+
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+<body data-spy="scroll" data-target="#compas-toc">
+  <!-- header -->
+  <header id="header" class="compas-header d-flex align-items-center">
+    <nav class="navbar navbar-expand navbar-dark col flex-column flex-md-row text-center">
+      <!-- brand -->
+      <a class="navbar-brand" href="https://gramaziokohler.github.io/compas_mrr">
+        <img src="_static/images/compas_icon_white.png" alt="COMPAS Mobile Robot Relocalization" width="48px" height="48px" />
+      </a>
+      <!-- brand -->
+      <!-- primary -->
+      <ul class="navbar-nav">
+        <li class="nav-item active"><a class="nav-link" href="https://gramaziokohler.github.io/compas_mrr">COMPAS Mobile Robot Relocalization</a></li>
+      </ul>
+      <!-- primary -->
+      <ul class="navbar-nav d-none d-md-flex ml-md-auto">
+        <!-- version -->
+        
+        <!-- version -->
+        <!-- social -->
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/gramaziokohler/compas_mrr" target="_blank">
+            <span class="fab fa-github fa-1x"></span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://forum.compas-framework.org" target="_blank">
+            <span class="fab fa-discourse fa-1x"></span>
+          </a>
+        </li>
+        <!-- social -->
+      </ul>
+    </nav>
+  </header>
+  <!-- header -->
+  <!-- main -->
+  <div class="container-fluid">
+    <div class="row">
+      <!-- main -->
+      <main class="col-12 col-md-9 col-xl-7 px-4 px-md-5 pt-2 pb-5 compas-content" role="main">
+        
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-3 bg-white px-0">
+            <li class="breadcrumb-item"><a href="#">COMPAS Mobile Robot Relocalization</a></li>
+            
+            <!-- <li class="breadcrumb-item active" aria-current="page">COMPAS Mobile Robot Relocalization</li> -->
+          </ol>
+        </nav>
+        
+
+        
+        
+        <section id="compas-mobile-robot-relocalization">
+<h1>COMPAS Mobile Robot Relocalization<a class="headerlink" href="#compas-mobile-robot-relocalization" title="Permalink to this heading">¶</a></h1>
+<p>Robot localization using external measuring device (total station).</p>
+<section id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/compas_mrr.three_pts_localization.html"><code class="docutils literal notranslate"><span class="pre">three_pts_localization()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/compas_mrr.arbitrary_pts_localization.html">Arbitrary points method for robot relocalization.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/compas_mrr.arbitrary_pts_localization.html#compas_mrr.arbitrary_pts_localization.arbitrary_pts_localization"><code class="docutils literal notranslate"><span class="pre">arbitrary_pts_localization()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/compas_mrr.xforms.html"><code class="docutils literal notranslate"><span class="pre">worldxy_to_robot_base_xform()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/compas_mrr.xforms.html#compas_mrr.xforms.xform_to_xyz_quaternion"><code class="docutils literal notranslate"><span class="pre">xform_to_xyz_quaternion()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/compas_mrr.utils.html"><code class="docutils literal notranslate"><span class="pre">rgpoint_to_cgpoint()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/compas_mrr.utils.html#compas_mrr.utils.cgpoint_to_rgpoint"><code class="docutils literal notranslate"><span class="pre">cgpoint_to_rgpoint()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/compas_mrr.utils.html#compas_mrr.utils.cgframe_to_rgplane"><code class="docutils literal notranslate"><span class="pre">cgframe_to_rgplane()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/compas_mrr.utils.html#compas_mrr.utils.rgtransform_to_cgtransformation"><code class="docutils literal notranslate"><span class="pre">rgtransform_to_cgtransformation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/compas_mrr.utils.html#compas_mrr.utils.rgtransform_to_matrix"><code class="docutils literal notranslate"><span class="pre">rgtransform_to_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/compas_mrr.utils.html#compas_mrr.utils.cgtransformation_to_rgtransform"><code class="docutils literal notranslate"><span class="pre">cgtransformation_to_rgtransform()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/compas_mrr.utils.html#compas_mrr.utils.matrix_to_rgtransform"><code class="docutils literal notranslate"><span class="pre">matrix_to_rgtransform()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+</div>
+</section>
+<section id="readme">
+<h2>README<a class="headerlink" href="#readme" title="Permalink to this heading">¶</a></h2>
+<a class="reference external image-reference" href="https://pypi.org/project/compas-mrr"><img alt="PyPI Package latest release" src="https://img.shields.io/pypi/v/compas_mrr.svg" /></a>
+<a class="reference external image-reference" href="https://anaconda.org/conda-forge/compas_mrr"><img alt="Conda" src="https://img.shields.io/conda/v/conda-forge/compas_mrr" /></a>
+<a class="reference external image-reference" href="https://img.shields.io/github/license/gramaziokohler/compas_mrr"><img alt="License" src="https://img.shields.io/github/license/gramaziokohler/compas_mrr" /></a>
+<a class="reference external image-reference" href="/docs/images/total_station_brunnen.png"><img alt="Image of total station and robot setup in Brunnen" src="docs/images/total_station_brunnen.png" /></a>
+<p>Photo from video shot by
+<a class="reference external" href="https://www.masdfab.com/2019-20-t3-mas-dfab">MASDFAB 1920 team</a>.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gramaziokohler.github.io/compas_mrr">Documentation</a></p></li>
+<li><p><a class="reference external" href="https://github.com/gramaziokohler/compas_mrr">Issue tracker</a></p></li>
+</ul>
+</section>
+<section id="sources">
+<h2>Sources<a class="headerlink" href="#sources" title="Permalink to this heading">¶</a></h2>
+<p>Code adapted from source code by Selen Ercan and Sandro Meier at <a class="reference external" href="https://gramaziokohler.arch.ethz.ch/">Gramazio
+Kohler Research</a>, ETH Zurich (2019).</p>
+<p>Original code:
+<a class="reference external" href="https://github.com/gramaziokohler/IF_jamming/blob/master/if_jamming/localization/">gramaziokohler/IF_jamming/if_jamming/localization</a></p>
+<section id="citing">
+<h3>Citing<a class="headerlink" href="#citing" title="Permalink to this heading">¶</a></h3>
+<blockquote>
+<div><p>Ercan, Selen, Sandro Meier, Fabio Gramazio, and Matthias Kohler. 2019.
+“Automated Localization of a Mobile Construction Robot with an External
+Measurement Device.” <em>In Proceedings of the 36th International Symposium on
+Automation and Robotics in Construction (ISARC 2019)</em>, 929-36. International
+Association on Automation and Robotics in Construction.
+<a class="reference external" href="https://doi.org/10.3929/ethz-b-000328442">https://doi.org/10.3929/ethz-b-000328442</a>.</p>
+</div></blockquote>
+<div class="language-bibtex notranslate"><div class="highlight"><pre><button class="btn copy"><i class="far fa-copy"></i></button><code><span></span><span class="nc">@inproceedings</span><span class="p">{</span><span class="nl">ercan_automated_2019</span><span class="p">,</span>
+<span class="w">    </span><span class="na">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Automated {Localization} of a {Mobile} {Construction} {Robot} with an {External} {Measurement} {Device}}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">copyright</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{http://rightsstatements.org/page/InC-NC/1.0/}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">url</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{https://www.research-collection.ethz.ch/handle/20.500.11850/328442}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">doi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{10.3929/ethz-b-000328442}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">language</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{en}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">booktitle</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Proceedings of the 36th {International} {Symposium} on {Automation} and {Robotics} in {Construction} ({ISARC} 2019)}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">publisher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{International Association on Automation and Robotics in Construction}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Ercan, Selen and Meier, Sandro and Gramazio, Fabio and Kohler, Matthias}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">year</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2019}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">note</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Accepted: 2019-09-11T08:51:48Z}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">pages</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{929--936}</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<section id="changelog">
+<h4>Changelog<a class="headerlink" href="#changelog" title="Permalink to this heading">¶</a></h4>
+<!-- markdownlint-disable-file MD024 --><p>All notable changes to this project will be documented in this file.</p>
+<p>The format is based on <a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
+and this project adheres to <a class="reference external" href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+</section>
+</section>
+</section>
+<section id="id1">
+<h2>[1.0.7] - 2021-08-25<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<section id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Bumped max compas version to <code class="docutils literal notranslate"><span class="pre">&lt;1.8</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>[1.0.6] - 2021-03-18<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<section id="id3">
+<h3>Changed<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Bumped max compas version to <code class="docutils literal notranslate"><span class="pre">1.2</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="id4">
+<h2>[1.0.5] - 2021-02-09<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h2>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Monkeypatch added for <code class="docutils literal notranslate"><span class="pre">compas._os.prepare_environment</span></code> applied if compas version
+is less than <code class="docutils literal notranslate"><span class="pre">v0.19.2</span></code> to get around
+<cite>a bug affecting ``compas.rpc.proxy`</cite> &lt;<a class="reference external" href="https://github.com/compas-dev/compas/issues/701">https://github.com/compas-dev/compas/issues/701</a>&gt;`_</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>Changed<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MeasurementPoint</span></code> moved to its own module and made available as second level
+import (<code class="docutils literal notranslate"><span class="pre">compas_mobile_robot_reloc.MeasurementPoint</span></code>). Still available from
+<code class="docutils literal notranslate"><span class="pre">compas_mobile_robot_reloc.utils</span></code> for backwards compatibility.</p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h2>[1.0.4] - 2021-02-08<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h2>
+<section id="id7">
+<h3>Changed<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Dependency version specifier for compas’ low bound set to <code class="docutils literal notranslate"><span class="pre">0.17.2</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="id8">
+<h2>[1.0.3] - 2021-02-01<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h2>
+<section id="id9">
+<h3>Changed<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Bumped compas to <code class="docutils literal notranslate"><span class="pre">&lt;2.0</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="id10">
+<h2>[1.0.2] - 2021-01-04<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h2>
+<p>No changes, version bumped to give give a clear indication of which conda
+package to use. (Lingering package
+<a class="reference external" href="https://anaconda.org/conda-forge/compas-mobile-robot-reloc">compas-mobile-robot-reloc</a>
+on conda forge.)</p>
+</section>
+<section id="id11">
+<h2>[1.0.1] - 2020-12-18<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h2>
+<section id="id12">
+<h3>Added<a class="headerlink" href="#id12" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Moved MeasurementPoint from grasshopper document to <code class="docutils literal notranslate"><span class="pre">compas_mobile_robot_reloc.utils</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="id13">
+<h2>[1.0.0] - 2020-12-18<a class="headerlink" href="#id13" title="Permalink to this heading">¶</a></h2>
+<p>Package broken out from
+<a class="reference external" href="https://github.com/gramaziokohler/rapid_clay_formations_fab">rapid_clay_formations_fab</a>.</p>
+<p>Typing and tests added.</p>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading">¶</a></h2>
+<div class="language-python notranslate"><div class="highlight"><pre><button class="btn copy"><i class="far fa-copy"></i></button><code><span></span><span class="n">MIT</span> <span class="n">License</span>
+
+<span class="n">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="mi">2020</span> <span class="n">Gramazio</span> <span class="n">Kohler</span> <span class="n">Research</span>
+
+<span class="n">Permission</span> <span class="ow">is</span> <span class="n">hereby</span> <span class="n">granted</span><span class="p">,</span> <span class="n">free</span> <span class="n">of</span> <span class="n">charge</span><span class="p">,</span> <span class="n">to</span> <span class="nb">any</span> <span class="n">person</span> <span class="n">obtaining</span> <span class="n">a</span> <span class="n">copy</span>
+<span class="n">of</span> <span class="n">this</span> <span class="n">software</span> <span class="ow">and</span> <span class="n">associated</span> <span class="n">documentation</span> <span class="n">files</span> <span class="p">(</span><span class="n">the</span> <span class="s2">&quot;Software&quot;</span><span class="p">),</span> <span class="n">to</span> <span class="n">deal</span>
+<span class="ow">in</span> <span class="n">the</span> <span class="n">Software</span> <span class="n">without</span> <span class="n">restriction</span><span class="p">,</span> <span class="n">including</span> <span class="n">without</span> <span class="n">limitation</span> <span class="n">the</span> <span class="n">rights</span>
+<span class="n">to</span> <span class="n">use</span><span class="p">,</span> <span class="n">copy</span><span class="p">,</span> <span class="n">modify</span><span class="p">,</span> <span class="n">merge</span><span class="p">,</span> <span class="n">publish</span><span class="p">,</span> <span class="n">distribute</span><span class="p">,</span> <span class="n">sublicense</span><span class="p">,</span> <span class="ow">and</span><span class="o">/</span><span class="ow">or</span> <span class="n">sell</span>
+<span class="n">copies</span> <span class="n">of</span> <span class="n">the</span> <span class="n">Software</span><span class="p">,</span> <span class="ow">and</span> <span class="n">to</span> <span class="n">permit</span> <span class="n">persons</span> <span class="n">to</span> <span class="n">whom</span> <span class="n">the</span> <span class="n">Software</span> <span class="ow">is</span>
+<span class="n">furnished</span> <span class="n">to</span> <span class="n">do</span> <span class="n">so</span><span class="p">,</span> <span class="n">subject</span> <span class="n">to</span> <span class="n">the</span> <span class="n">following</span> <span class="n">conditions</span><span class="p">:</span>
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">copyright</span> <span class="n">notice</span> <span class="ow">and</span> <span class="n">this</span> <span class="n">permission</span> <span class="n">notice</span> <span class="n">shall</span> <span class="n">be</span> <span class="n">included</span> <span class="ow">in</span> <span class="nb">all</span>
+<span class="n">copies</span> <span class="ow">or</span> <span class="n">substantial</span> <span class="n">portions</span> <span class="n">of</span> <span class="n">the</span> <span class="n">Software</span><span class="o">.</span>
+
+<span class="n">THE</span> <span class="n">SOFTWARE</span> <span class="n">IS</span> <span class="n">PROVIDED</span> <span class="s2">&quot;AS IS&quot;</span><span class="p">,</span> <span class="n">WITHOUT</span> <span class="n">WARRANTY</span> <span class="n">OF</span> <span class="n">ANY</span> <span class="n">KIND</span><span class="p">,</span> <span class="n">EXPRESS</span> <span class="n">OR</span>
+<span class="n">IMPLIED</span><span class="p">,</span> <span class="n">INCLUDING</span> <span class="n">BUT</span> <span class="n">NOT</span> <span class="n">LIMITED</span> <span class="n">TO</span> <span class="n">THE</span> <span class="n">WARRANTIES</span> <span class="n">OF</span> <span class="n">MERCHANTABILITY</span><span class="p">,</span>
+<span class="n">FITNESS</span> <span class="n">FOR</span> <span class="n">A</span> <span class="n">PARTICULAR</span> <span class="n">PURPOSE</span> <span class="n">AND</span> <span class="n">NONINFRINGEMENT</span><span class="o">.</span> <span class="n">IN</span> <span class="n">NO</span> <span class="n">EVENT</span> <span class="n">SHALL</span> <span class="n">THE</span>
+<span class="n">AUTHORS</span> <span class="n">OR</span> <span class="n">COPYRIGHT</span> <span class="n">HOLDERS</span> <span class="n">BE</span> <span class="n">LIABLE</span> <span class="n">FOR</span> <span class="n">ANY</span> <span class="n">CLAIM</span><span class="p">,</span> <span class="n">DAMAGES</span> <span class="n">OR</span> <span class="n">OTHER</span>
+<span class="n">LIABILITY</span><span class="p">,</span> <span class="n">WHETHER</span> <span class="n">IN</span> <span class="n">AN</span> <span class="n">ACTION</span> <span class="n">OF</span> <span class="n">CONTRACT</span><span class="p">,</span> <span class="n">TORT</span> <span class="n">OR</span> <span class="n">OTHERWISE</span><span class="p">,</span> <span class="n">ARISING</span> <span class="n">FROM</span><span class="p">,</span>
+<span class="n">OUT</span> <span class="n">OF</span> <span class="n">OR</span> <span class="n">IN</span> <span class="n">CONNECTION</span> <span class="n">WITH</span> <span class="n">THE</span> <span class="n">SOFTWARE</span> <span class="n">OR</span> <span class="n">THE</span> <span class="n">USE</span> <span class="n">OR</span> <span class="n">OTHER</span> <span class="n">DEALINGS</span> <span class="n">IN</span> <span class="n">THE</span>
+<span class="n">SOFTWARE</span><span class="o">.</span>
+</code></pre></div>
+</div>
+</section>
+</section>
+
+        
+      </main>
+      <!-- content -->
+      <!-- sidebar -->
+      <div class="col-12 col-md-3 compas-sidebar" role="navigation">
+        <form id="search" class="d-flex align-items-center compas-searchbox" action="search.html" method="get">
+          <input class="form-control" type="text" name="q" placeholder="Search docs" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+          <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#compas-navigation" aria-controls="compas-navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </form>
+        
+        
+        <div id="compas-navigation" class="collapse compas-navigation">
+          <ul class="nav flex-column collapse">
+<li class="toctree-l1 nav-item"><a class="nav-link reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 nav-item"><a class="nav-link reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 nav-item"><a class="nav-link reference internal" href="reference.html">API reference</a><ul class="nav flex-column collapse">
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="reference/compas_mrr.three_pts_localization.html"><code class="docutils literal notranslate"><span class="pre">three_pts_localization()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="reference/compas_mrr.arbitrary_pts_localization.html">Arbitrary points method for robot relocalization.</a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="reference/compas_mrr.arbitrary_pts_localization.html#compas_mrr.arbitrary_pts_localization.arbitrary_pts_localization"><code class="docutils literal notranslate"><span class="pre">arbitrary_pts_localization()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="reference/compas_mrr.xforms.html"><code class="docutils literal notranslate"><span class="pre">worldxy_to_robot_base_xform()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="reference/compas_mrr.xforms.html#compas_mrr.xforms.xform_to_xyz_quaternion"><code class="docutils literal notranslate"><span class="pre">xform_to_xyz_quaternion()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="reference/compas_mrr.utils.html"><code class="docutils literal notranslate"><span class="pre">rgpoint_to_cgpoint()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="reference/compas_mrr.utils.html#compas_mrr.utils.cgpoint_to_rgpoint"><code class="docutils literal notranslate"><span class="pre">cgpoint_to_rgpoint()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="reference/compas_mrr.utils.html#compas_mrr.utils.cgframe_to_rgplane"><code class="docutils literal notranslate"><span class="pre">cgframe_to_rgplane()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="reference/compas_mrr.utils.html#compas_mrr.utils.rgtransform_to_cgtransformation"><code class="docutils literal notranslate"><span class="pre">rgtransform_to_cgtransformation()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="reference/compas_mrr.utils.html#compas_mrr.utils.rgtransform_to_matrix"><code class="docutils literal notranslate"><span class="pre">rgtransform_to_matrix()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="reference/compas_mrr.utils.html#compas_mrr.utils.cgtransformation_to_rgtransform"><code class="docutils literal notranslate"><span class="pre">cgtransformation_to_rgtransform()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="reference/compas_mrr.utils.html#compas_mrr.utils.matrix_to_rgtransform"><code class="docutils literal notranslate"><span class="pre">matrix_to_rgtransform()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1 nav-item"><a class="nav-link reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1 nav-item"><a class="nav-link reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1 nav-item"><a class="nav-link reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+        
+      </div>
+      <!-- sidebar -->
+      <!-- toc -->
+      <div class="d-none d-xl-block col-xl-2 compas-toc" role="toc">
+        
+        <ul class="nav flex-column" id="compas-toc">
+<li class="nav-item"><a class="nav-link reference internal" href="#">COMPAS Mobile Robot Relocalization</a><ul class="nav flex-column">
+<li class="nav-item"><a class="nav-link reference internal" href="#table-of-contents">Table of contents</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#readme">README</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#sources">Sources</a><ul class="nav flex-column">
+<li class="nav-item"><a class="nav-link reference internal" href="#citing">Citing</a><ul class="nav flex-column">
+<li class="nav-item"><a class="nav-link reference internal" href="#changelog">Changelog</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link reference internal" href="#id1">[1.0.7] - 2021-08-25</a><ul class="nav flex-column">
+<li class="nav-item"><a class="nav-link reference internal" href="#changed">Changed</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link reference internal" href="#id2">[1.0.6] - 2021-03-18</a><ul class="nav flex-column">
+<li class="nav-item"><a class="nav-link reference internal" href="#id3">Changed</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link reference internal" href="#id4">[1.0.5] - 2021-02-09</a><ul class="nav flex-column">
+<li class="nav-item"><a class="nav-link reference internal" href="#added">Added</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#id5">Changed</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link reference internal" href="#id6">[1.0.4] - 2021-02-08</a><ul class="nav flex-column">
+<li class="nav-item"><a class="nav-link reference internal" href="#id7">Changed</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link reference internal" href="#id8">[1.0.3] - 2021-02-01</a><ul class="nav flex-column">
+<li class="nav-item"><a class="nav-link reference internal" href="#id9">Changed</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link reference internal" href="#id10">[1.0.2] - 2021-01-04</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#id11">[1.0.1] - 2020-12-18</a><ul class="nav flex-column">
+<li class="nav-item"><a class="nav-link reference internal" href="#id12">Added</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link reference internal" href="#id13">[1.0.0] - 2020-12-18</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+      <!-- toc -->
+    </div>
+  </div>
+  <!-- main -->
+  <!-- footer -->
+  <footer class="compas-footer">
+    <nav class="nav p-2">
+      
+
+      
+      <a href="installation.html" title="Installation" class="nav-link footer-link float-end text-right d-flex w-50" rel="next">
+        <div class="nav-title footer-link flex-grow-1 align-self-center">
+          <div class="nav-direction small font-weight-light">Next</div>
+          Installation
+        </div>
+        <div class="nav-button p-2 m-2"><i class="fas fa-arrow-right"></i></div>
+      </a>
+      
+    </nav>
+  </footer>
+  <!-- footer -->
+  <!-- below -->
+  <div class="below py-5" style="background-color: #222;">
+    <div class="container">
+      <div class="row flex-column">
+        <div class="col-12 col-md-6 mx-md-auto text-center">
+          <h4 class="pb-3 below-text">COMPAS</h4>
+          <p class="below-text">
+            A computational framework for collaboration and research
+            in Architecture, Engineering, Fabrication, and Construction.
+          </p>
+          <nav class="nav justify-content-center pb-3">
+            <a class="nav-link mx-2 px-0 below-link" href="http://github.com/compas-dev" target="_blank">
+              <span class="fab fa-github fa-1x"></span>
+            </a>
+            <a class="nav-link mx-2 px-0 below-link" href="http://forum.compas-framework.org" target="_blank">
+              <span class="fab fa-discourse fa-1x"></span>
+            </a>
+            <a class="nav-link mx-2 px-0 below-link" href="https://pypi.org/project/COMPAS/" target="_blank">
+              <span class="fab fa-python fa-1x"></span>
+            </a>
+          </nav>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <p class="p-0 m-0 below-text">Copyright &copy; 2017-2021 compas-dev</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- below -->
+  <!-- scripts -->
+  <script id="documentation_options" data-url_root="" src="_static/documentation_options.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.0.0/anchor.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+
+  <script src="_static/underscore.js"></script>
+  <script src="_static/doctools.js"></script>
+  <script src="_static/searchtools.js"></script>
+  <script src="_static/language_data.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $(".language-default code").addClass("python");
+      $(".language-python code").addClass("python");
+      $(".language-bash code").addClass("bash");
+      $(".language-cpp code").addClass("cpp");
+      $(".language-json code").addClass("json");
+      $(".language-none code").addClass("plaintext");
+
+      hljs.initHighlighting();
+      anchors.add();
+
+      new ClipboardJS(".btn.copy", {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      $("#compas-navigation li.active > ul").each(function() {
+        var ul = $(this);
+        if (! ul.hasClass("show")) {
+          ul.addClass("show");
+        }
+      });
+
+      $("#compas-navigation li.toctree-l1").has("ul").each(function() {
+        var li = $(this);
+        li.addClass("has-children");
+        if (li.hasClass("active")) {
+          li.prepend('<span class="menu-toggle"><i class="fas fa-chevron-up"></i></span>');
+        }
+        else {
+          li.prepend('<span class="menu-toggle"><i class="fas fa-chevron-down"></i></span>');
+        }
+      });
+
+      $(".menu-toggle").click(function() {
+        var toggle = $(this);
+        toggle.siblings("ul").toggleClass("show");
+      });
+
+    });
+
+
+    var url = $("#doc_versions").data("url");
+    var docs_site = $("#doc_versions").data("docs");
+
+    if (url) {
+      $.get(url, res => {
+        var lines = res.match(/[^\r\n]+/g);
+        lines.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+        lines.reverse();
+        lines.forEach(version => {
+          $("#doc_version_list").append("<a class=\"dropdown-item\" href=\"" + docs_site + version + "\">" + version + "</a>");
+        });
+
+        var selected_version = $('.nav-versions .dropdown-item').filter(function (i, ver) {
+          return window.location.href.startsWith(ver.href);
+        });
+        selected_version.addClass('active');
+        $("#bd-versions").text(selected_version.text());
+
+      })
+    }
+  </script>
+  <!-- scripts -->
+  
+  
+</body>
+
+</html>
