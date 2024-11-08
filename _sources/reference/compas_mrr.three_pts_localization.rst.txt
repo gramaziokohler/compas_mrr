@@ -1,0 +1,4 @@
+.. automodule:: compas_mrr.three_pts_localization
+   :members:
+   :undoc-members:
+   :show-inheritance:

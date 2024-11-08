@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <title>compas_mrr - Arbitrary points method for robot relocalization.</title>
+  
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <meta name="author" content="" />
+  <meta name="description" content="" />
+
+  <link rel="shortcut icon" href="../_static/images/compas.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/mono-blue.min.css">
+  <link rel="stylesheet" type="text/css" href="../_static/css/compas.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/compas-reference.css" />
+
+  
+  <link rel="next" title="&lt;no title&gt;" href="compas_mrr.xforms.html" />
+  
+
+  
+  <link rel="prev" title="&lt;no title&gt;" href="compas_mrr.three_pts_localization.html" />
+  
+
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+<body data-spy="scroll" data-target="#compas-toc">
+  <!-- header -->
+  <header id="header" class="compas-header d-flex align-items-center">
+    <nav class="navbar navbar-expand navbar-dark col flex-column flex-md-row text-center">
+      <!-- brand -->
+      <a class="navbar-brand" href="https://gramaziokohler.github.io/compas_mrr">
+        <img src="../_static/images/compas_icon_white.png" alt="COMPAS Mobile Robot Relocalization" width="48px" height="48px" />
+      </a>
+      <!-- brand -->
+      <!-- primary -->
+      <ul class="navbar-nav">
+        <li class="nav-item active"><a class="nav-link" href="https://gramaziokohler.github.io/compas_mrr">COMPAS Mobile Robot Relocalization</a></li>
+      </ul>
+      <!-- primary -->
+      <ul class="navbar-nav d-none d-md-flex ml-md-auto">
+        <!-- version -->
+        
+        <!-- version -->
+        <!-- social -->
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/gramaziokohler/compas_mrr" target="_blank">
+            <span class="fab fa-github fa-1x"></span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://forum.compas-framework.org" target="_blank">
+            <span class="fab fa-discourse fa-1x"></span>
+          </a>
+        </li>
+        <!-- social -->
+      </ul>
+    </nav>
+  </header>
+  <!-- header -->
+  <!-- main -->
+  <div class="container-fluid">
+    <div class="row">
+      <!-- main -->
+      <main class="col-12 col-md-9 col-xl-7 px-4 px-md-5 pt-2 pb-5 compas-content" role="main">
+        
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-3 bg-white px-0">
+            <li class="breadcrumb-item"><a href="../index.html">COMPAS Mobile Robot Relocalization</a></li>
+            
+            <li class="breadcrumb-item"><a href="../reference.html">API reference</a></li>
+            
+            <!-- <li class="breadcrumb-item active" aria-current="page">Arbitrary points method for robot relocalization.</li> -->
+          </ol>
+        </nav>
+        
+
+        
+        
+        <span class="target" id="module-compas_mrr.arbitrary_pts_localization"></span><section id="arbitrary-points-method-for-robot-relocalization">
+<h1>Arbitrary points method for robot relocalization.<a class="headerlink" href="#arbitrary-points-method-for-robot-relocalization" title="Permalink to this heading">¶</a></h1>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="compas_mrr.arbitrary_pts_localization.arbitrary_pts_localization">
+<span class="sig-prename descclassname"><span class="pre">compas_mrr.arbitrary_pts_localization.</span></span><span class="sig-name descname"><span class="pre">arbitrary_pts_localization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rcs_coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wcs_coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/compas_mrr/arbitrary_pts_localization.html#arbitrary_pts_localization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#compas_mrr.arbitrary_pts_localization.arbitrary_pts_localization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the RCS origin frame.</p>
+<p>Finding the origin is formulated as an optimization problem where we want
+to find the origin and two orthonormal vectors defining the coordinate
+system. At the same time, the position of the localization points in this
+new coordinate system should match the measurements as close as possible.
+Therefore the deviation from the measurements is used as the cost function.
+The only constraints are that the x and y vector need to have length 1 and
+be orthogonal to each other.  The optimization variable is a vector with 9
+entries: X = [o, x, y] where o is the origin of the coordinate system and
+x, y the vectors spanning the x-y-plane. Each of them is a 3 dimensional
+vector.  <strong>Important</strong>: Ensure that the order of rcs_coords and
+measurements is identical. I.e. the i-th entry in measurements is the
+measurement of the i-th localization point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rcs_coords</strong> – The points where the robot endeffector was positioned to take
+measurements. These points are in the RCS.</p></li>
+<li><p><strong>wcs_coords</strong> – The measurements taken in the world coordinate system (WCS) with the
+total station. These are the coordinates of the rcs_coords in
+the WCS.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple of 3 vectors (lists with 3 elements) where the first represents
+the origin of the RCS, the second is the direction of the x axis and
+the third the direction of the y axis. The x and y axis are vectors
+with length 1.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+
+        
+      </main>
+      <!-- content -->
+      <!-- sidebar -->
+      <div class="col-12 col-md-3 compas-sidebar" role="navigation">
+        <form id="search" class="d-flex align-items-center compas-searchbox" action="../search.html" method="get">
+          <input class="form-control" type="text" name="q" placeholder="Search docs" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+          <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#compas-navigation" aria-controls="compas-navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </form>
+        
+        
+        <div id="compas-navigation" class="collapse compas-navigation">
+          <ul class="nav flex-column collapse show active">
+<li class="toctree-l1 nav-item"><a class="nav-link reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 nav-item"><a class="nav-link reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 nav-item active"><a class="nav-link reference internal" href="../reference.html">API reference</a><ul class="nav flex-column collapse show active">
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="compas_mrr.three_pts_localization.html"><code class="docutils literal notranslate"><span class="pre">three_pts_localization()</span></code></a></li>
+<li class="toctree-l2 nav-item active"><a class="nav-link active reference internal" href="#">Arbitrary points method for robot relocalization.</a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="#compas_mrr.arbitrary_pts_localization.arbitrary_pts_localization"><code class="docutils literal notranslate"><span class="pre">arbitrary_pts_localization()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="compas_mrr.xforms.html"><code class="docutils literal notranslate"><span class="pre">worldxy_to_robot_base_xform()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="compas_mrr.xforms.html#compas_mrr.xforms.xform_to_xyz_quaternion"><code class="docutils literal notranslate"><span class="pre">xform_to_xyz_quaternion()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="compas_mrr.utils.html"><code class="docutils literal notranslate"><span class="pre">rgpoint_to_cgpoint()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="compas_mrr.utils.html#compas_mrr.utils.cgpoint_to_rgpoint"><code class="docutils literal notranslate"><span class="pre">cgpoint_to_rgpoint()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="compas_mrr.utils.html#compas_mrr.utils.cgframe_to_rgplane"><code class="docutils literal notranslate"><span class="pre">cgframe_to_rgplane()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="compas_mrr.utils.html#compas_mrr.utils.rgtransform_to_cgtransformation"><code class="docutils literal notranslate"><span class="pre">rgtransform_to_cgtransformation()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="compas_mrr.utils.html#compas_mrr.utils.rgtransform_to_matrix"><code class="docutils literal notranslate"><span class="pre">rgtransform_to_matrix()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="compas_mrr.utils.html#compas_mrr.utils.cgtransformation_to_rgtransform"><code class="docutils literal notranslate"><span class="pre">cgtransformation_to_rgtransform()</span></code></a></li>
+<li class="toctree-l2 nav-item"><a class="nav-link reference internal" href="compas_mrr.utils.html#compas_mrr.utils.matrix_to_rgtransform"><code class="docutils literal notranslate"><span class="pre">matrix_to_rgtransform()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1 nav-item"><a class="nav-link reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1 nav-item"><a class="nav-link reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1 nav-item"><a class="nav-link reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+        
+      </div>
+      <!-- sidebar -->
+      <!-- toc -->
+      <div class="d-none d-xl-block col-xl-2 compas-toc" role="toc">
+        
+        <ul class="nav flex-column" id="compas-toc">
+<li class="nav-item"><a class="nav-link reference internal" href="#">Arbitrary points method for robot relocalization.</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#compas_mrr.arbitrary_pts_localization.arbitrary_pts_localization"><code class="docutils literal notranslate"><span class="pre">arbitrary_pts_localization()</span></code></a></li>
+</ul>
+
+      </div>
+      <!-- toc -->
+    </div>
+  </div>
+  <!-- main -->
+  <!-- footer -->
+  <footer class="compas-footer">
+    <nav class="nav p-2">
+      
+      <a href="compas_mrr.three_pts_localization.html" title="&lt;no title&gt;" class="nav-link footer-link float-start text-left d-flex w-50" rel="prev">
+        <div class="nav-button p-2 m-2"><i class="fas fa-arrow-left"></i></div>
+        <div class="nav-title flex-grow-1 align-self-center">
+          <div class="nav-direction small font-weight-light">Previous</div>
+          &lt;no title&gt;
+        </div>
+      </a>
+      
+
+      
+      <a href="compas_mrr.xforms.html" title="&lt;no title&gt;" class="nav-link footer-link float-end text-right d-flex w-50" rel="next">
+        <div class="nav-title footer-link flex-grow-1 align-self-center">
+          <div class="nav-direction small font-weight-light">Next</div>
+          &lt;no title&gt;
+        </div>
+        <div class="nav-button p-2 m-2"><i class="fas fa-arrow-right"></i></div>
+      </a>
+      
+    </nav>
+  </footer>
+  <!-- footer -->
+  <!-- below -->
+  <div class="below py-5" style="background-color: #222;">
+    <div class="container">
+      <div class="row flex-column">
+        <div class="col-12 col-md-6 mx-md-auto text-center">
+          <h4 class="pb-3 below-text">COMPAS</h4>
+          <p class="below-text">
+            A computational framework for collaboration and research
+            in Architecture, Engineering, Fabrication, and Construction.
+          </p>
+          <nav class="nav justify-content-center pb-3">
+            <a class="nav-link mx-2 px-0 below-link" href="http://github.com/compas-dev" target="_blank">
+              <span class="fab fa-github fa-1x"></span>
+            </a>
+            <a class="nav-link mx-2 px-0 below-link" href="http://forum.compas-framework.org" target="_blank">
+              <span class="fab fa-discourse fa-1x"></span>
+            </a>
+            <a class="nav-link mx-2 px-0 below-link" href="https://pypi.org/project/COMPAS/" target="_blank">
+              <span class="fab fa-python fa-1x"></span>
+            </a>
+          </nav>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <p class="p-0 m-0 below-text">Copyright &copy; 2017-2021 compas-dev</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- below -->
+  <!-- scripts -->
+  <script id="documentation_options" data-url_root="" src="../_static/documentation_options.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.0.0/anchor.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+
+  <script src="../_static/underscore.js"></script>
+  <script src="../_static/doctools.js"></script>
+  <script src="../_static/searchtools.js"></script>
+  <script src="../_static/language_data.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $(".language-default code").addClass("python");
+      $(".language-python code").addClass("python");
+      $(".language-bash code").addClass("bash");
+      $(".language-cpp code").addClass("cpp");
+      $(".language-json code").addClass("json");
+      $(".language-none code").addClass("plaintext");
+
+      hljs.initHighlighting();
+      anchors.add();
+
+      new ClipboardJS(".btn.copy", {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      $("#compas-navigation li.active > ul").each(function() {
+        var ul = $(this);
+        if (! ul.hasClass("show")) {
+          ul.addClass("show");
+        }
+      });
+
+      $("#compas-navigation li.toctree-l1").has("ul").each(function() {
+        var li = $(this);
+        li.addClass("has-children");
+        if (li.hasClass("active")) {
+          li.prepend('<span class="menu-toggle"><i class="fas fa-chevron-up"></i></span>');
+        }
+        else {
+          li.prepend('<span class="menu-toggle"><i class="fas fa-chevron-down"></i></span>');
+        }
+      });
+
+      $(".menu-toggle").click(function() {
+        var toggle = $(this);
+        toggle.siblings("ul").toggleClass("show");
+      });
+
+    });
+
+
+    var url = $("#doc_versions").data("url");
+    var docs_site = $("#doc_versions").data("docs");
+
+    if (url) {
+      $.get(url, res => {
+        var lines = res.match(/[^\r\n]+/g);
+        lines.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+        lines.reverse();
+        lines.forEach(version => {
+          $("#doc_version_list").append("<a class=\"dropdown-item\" href=\"" + docs_site + version + "\">" + version + "</a>");
+        });
+
+        var selected_version = $('.nav-versions .dropdown-item').filter(function (i, ver) {
+          return window.location.href.startsWith(ver.href);
+        });
+        selected_version.addClass('active');
+        $("#bd-versions").text(selected_version.text());
+
+      })
+    }
+  </script>
+  <!-- scripts -->
+  
+  
+</body>
+
+</html>
