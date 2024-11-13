@@ -1,0 +1,19 @@
+compas\_mrr package
+===================
+
+.. automodule:: compas_mrr
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   compas_mrr.arbitrary_pts_localization
+   compas_mrr.measurement_point
+   compas_mrr.three_pts_localization
+   compas_mrr.utils
+   compas_mrr.xforms
