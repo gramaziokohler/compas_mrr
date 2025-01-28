@@ -1,0 +1,4 @@
+.. automodule:: compas_mrr.measurement_point
+   :members:
+   :undoc-members:
+   :show-inheritance:
